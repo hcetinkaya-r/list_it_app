@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:list_it_app/landing_page.dart';
 import 'package:list_it_app/locator.dart';
 import 'package:list_it_app/view_models/user_model.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "List-it App",
+      title: "list-it App",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.grey,
@@ -27,10 +27,9 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Futura',
       ),
       home: ChangeNotifierProvider(
-        create: (context)=>UserModel(),
+        create: (context) => UserModel(),
         child: LandingPage(),
       ),
     );
   }
 }
-
