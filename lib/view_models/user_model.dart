@@ -68,4 +68,19 @@ class UserModel with ChangeNotifier implements AuthBase {
       state = ViewState.Idle;
     }
   }
+
+  @override
+  Future<AppUser> signInWithGoogle() async {
+    try {
+      state = ViewState.Busy;
+      _appUser = await _userRepository.signInWithGoogle();
+      return _appUser;
+    } catch (e) {
+      debugPrint("View modeldeki sign in with google hata: " + e.toString());
+      return null;
+    } finally {
+      state = ViewState.Idle;
+    }
+
+  }
 }

@@ -18,6 +18,8 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
+
         title: Text("Ana Sayfa"),
         actions: <Widget>[
           FlatButton(
