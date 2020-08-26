@@ -20,24 +20,24 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
 
-        title: Text("Ana Sayfa"),
+        title: Text("Main Page"),
         actions: <Widget>[
           FlatButton(
-              onPressed: () => _cikisYap(context), child: Text("Çıkış yap"))
+              onPressed: () => _doSignOut(context), child: Text("Sign out"))
         ],
       ),
       body: Center(
-        child: Text("Hoşgeldiniz ${appUser.userID}"),
+        child: Text("Welcome... ${appUser.userID}"),
       ),
     );
   }
 
-  Future<bool> _cikisYap(BuildContext context) async {
+  Future<bool> _doSignOut(BuildContext context) async {
     Provider.of<UserModel>(context, listen: false);
 
     final _userModel = Provider.of<UserModel>(context, listen: false);
-    bool sonuc = await _userModel.signOut();
+    bool result = await _userModel.signOut();
 
-    return sonuc;
+    return result;
   }
 }

@@ -13,7 +13,7 @@ class FirebaseAuthService implements AuthBase {
 
       return _userFromFirebase(user);
     } catch (e) {
-      print("HATA CURRENT USER" + e.toString());
+      print("firebase auth service current user hata: " + e.toString());
       return null;
     }
   }
@@ -29,7 +29,7 @@ class FirebaseAuthService implements AuthBase {
       UserCredential userCredential = await _firebaseAuth.signInAnonymously();
       return _userFromFirebase(userCredential.user);
     } catch (e) {
-      print("ANONIM GIRIS HATA:" + e.toString());
+      print("firebase auth service sign in anonymously hata: " + e.toString());
       return null;
     }
   }
@@ -42,7 +42,7 @@ class FirebaseAuthService implements AuthBase {
       await _firebaseAuth.signOut();
       return true;
     } catch (e) {
-      print("SIGN OUT HATA:" + e.toString());
+      print("firebase auth service sign out hata:" + e.toString());
       return false;
     }
   }
@@ -67,6 +67,34 @@ class FirebaseAuthService implements AuthBase {
         return null;
       }
     } else {
+      return null;
+    }
+  }
+
+  @override
+  Future<AppUser> createUserWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      UserCredential userCredential = await _firebaseAuth
+          .createUserWithEmailAndPassword(email: email, password: password);
+      return _userFromFirebase(userCredential.user);
+    } catch (e) {
+      print("firebase auth service create user with email and password hata: " +
+          e.toString());
+      return null;
+    }
+  }
+
+  @override
+  Future<AppUser> signInWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      UserCredential userCredential = await _firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password);
+      return _userFromFirebase(userCredential.user);
+    } catch (e) {
+      print("firebase auth service sign in with email and password hata: " +
+          e.toString());
       return null;
     }
   }

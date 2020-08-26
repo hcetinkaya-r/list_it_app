@@ -1,5 +1,3 @@
-
-
 import 'package:list_it_app/locator.dart';
 import 'package:list_it_app/models/app_user.dart';
 import 'package:list_it_app/services/auth_base.dart';
@@ -13,7 +11,7 @@ class UserRepository implements AuthBase {
   FakeAuthenticationService _fakeAuthenticationService =
       locator<FakeAuthenticationService>();
 
-  AppMode appMode = AppMode.RELEASE;
+  AppMode appMode = AppMode.DEBUG;
 
   @override
   Future<AppUser> currentUser() async {
@@ -49,6 +47,29 @@ class UserRepository implements AuthBase {
     } else {
       return await _firebaseAuthService.signInWithGoogle();
     }
+  }
 
+  @override
+  Future<AppUser> createUserWithEmailAndPassword(
+      String email, String password) async {
+    if (appMode == AppMode.DEBUG) {
+      return await _fakeAuthenticationService.createUserWithEmailAndPassword(
+          email, password);
+    } else {
+      return await _firebaseAuthService.createUserWithEmailAndPassword(
+          email, password);
+    }
+  }
+
+  @override
+  Future<AppUser> signInWithEmailAndPassword(
+      String email, String password) async {
+    if (appMode == AppMode.DEBUG) {
+      return await _fakeAuthenticationService.signInWithEmailAndPassword(
+          email, password);
+    } else {
+      return await _firebaseAuthService.signInWithEmailAndPassword(
+          email, password);
+    }
   }
 }

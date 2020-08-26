@@ -4,14 +4,14 @@ import 'package:list_it_app/models/app_user.dart';
 import 'package:list_it_app/repository/user_repository.dart';
 import 'package:list_it_app/services/auth_base.dart';
 
-
 enum ViewState { Idle, Busy }
 
 class UserModel with ChangeNotifier implements AuthBase {
   ViewState _state = ViewState.Idle;
   UserRepository _userRepository = locator<UserRepository>();
   AppUser _appUser;
-
+  String emailErrorMessage;
+  String passwordErrorMessage;
 
   AppUser get appUser => _appUser;
 
@@ -22,7 +22,7 @@ class UserModel with ChangeNotifier implements AuthBase {
     notifyListeners();
   }
 
-  UserModel(){
+  UserModel() {
     currentUser();
   }
 
@@ -59,7 +59,7 @@ class UserModel with ChangeNotifier implements AuthBase {
     try {
       state = ViewState.Busy;
       bool sonuc = await _userRepository.signOut();
-      _appUser=null;
+      _appUser = null;
       return sonuc;
     } catch (e) {
       debugPrint("View modeldeki sign out hata: " + e.toString());
@@ -81,6 +81,60 @@ class UserModel with ChangeNotifier implements AuthBase {
     } finally {
       state = ViewState.Idle;
     }
+  }
 
+  @override
+  Future<AppUser> createUserWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      if (_emailPasswordControl(email, password)) {
+        state = ViewState.Busy;
+        _appUser = await _userRepository.createUserWithEmailAndPassword(
+            email, password);
+        return _appUser;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      debugPrint(
+          "View modeldeki user model create user email and password hata: " +
+              e.toString());
+      return null;
+    } finally {
+      state = ViewState.Idle;
+    }
+  }
+
+  @override
+  Future<AppUser> signInWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      if (_emailPasswordControl(email, password)) {
+        state = ViewState.Busy;
+        _appUser =
+            await _userRepository.signInWithEmailAndPassword(email, password);
+        return _appUser;
+      } else
+        return null;
+    } catch (e) {
+      debugPrint("View modeldeki user model sign in with email and password: " +
+          e.toString());
+      return null;
+    } finally {
+      state = ViewState.Idle;
+    }
+  }
+
+  bool _emailPasswordControl(String email, String password) {
+    var result = true;
+    if (password.length < 6) {
+      passwordErrorMessage = "The password should be 6 characters at least";
+      result = false;
+    }else passwordErrorMessage = null;
+    if (!email.contains('@')) {
+      emailErrorMessage = "Invalid email";
+      result = false;
+    }else emailErrorMessage = null;
+    return result;
   }
 }
