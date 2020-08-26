@@ -89,10 +89,3 @@ class SignInPage extends StatelessWidget {
   }
 }
 
-/*
- Text(
-              "Please Sign In",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
-            ),
- */

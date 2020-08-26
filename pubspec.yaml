@@ -27,7 +27,6 @@ dependencies:
   get_it: ^4.0.4
   provider: ^4.3.2+1
   google_sign_in: ^4.5.3
-  flutter_facebook_login: ^3.0.0
 
 
 
