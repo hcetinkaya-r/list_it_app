@@ -23,7 +23,7 @@ class FirebaseAuthService implements AuthBase {
     return AppUser(userID: user.uid);
   }
 
-  @override
+  /*@override
   Future<AppUser> signInAnonymously() async {
     try {
       UserCredential userCredential = await _firebaseAuth.signInAnonymously();
@@ -32,7 +32,7 @@ class FirebaseAuthService implements AuthBase {
       print("firebase auth service sign in anonymously hata: " + e.toString());
       return null;
     }
-  }
+  }*/
 
   @override
   Future<bool> signOut() async {

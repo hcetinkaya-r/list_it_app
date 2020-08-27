@@ -9,11 +9,11 @@ class FakeAuthenticationService implements AuthBase {
     return await Future.value(AppUser(userID: userID));
   }
 
-  @override
+  /*@override
   Future<AppUser> signInAnonymously() async {
     return await Future.delayed(
         Duration(seconds: 2), () => AppUser(userID: userID));
-  }
+  }*/
 
   @override
   Future<bool> signOut() {

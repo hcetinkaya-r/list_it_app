@@ -40,7 +40,7 @@ class UserModel with ChangeNotifier implements AuthBase {
     }
   }
 
-  @override
+  /*@override
   Future<AppUser> signInAnonymously() async {
     try {
       state = ViewState.Busy;
@@ -52,7 +52,7 @@ class UserModel with ChangeNotifier implements AuthBase {
     } finally {
       state = ViewState.Idle;
     }
-  }
+  }*/
 
   @override
   Future<bool> signOut() async {

@@ -66,8 +66,8 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    _butonText = _formType == FormType.Login ? "Log in" : "Sign in";
-    _linkText = _formType == FormType.Login ? "Sign in" : "Log in";
+    _butonText = _formType == FormType.Login ? "Log in" : "Sign up";
+    _linkText = _formType == FormType.Login ? "Sign up" : "Log in";
     _textChange = _formType == FormType.Login ? "Don't have an account?" : "Do you have an account?";
 
 

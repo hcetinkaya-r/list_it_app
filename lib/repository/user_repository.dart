@@ -22,14 +22,14 @@ class UserRepository implements AuthBase {
     }
   }
 
-  @override
+  /*@override
   Future<AppUser> signInAnonymously() async {
     if (appMode == AppMode.DEBUG) {
       return await _fakeAuthenticationService.signInAnonymously();
     } else {
       return await _firebaseAuthService.signInAnonymously();
     }
-  }
+  }*/
 
   @override
   Future<bool> signOut() async {
