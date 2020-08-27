@@ -130,11 +130,13 @@ class UserModel with ChangeNotifier implements AuthBase {
     if (password.length < 6) {
       passwordErrorMessage = "The password should be 6 characters at least";
       result = false;
-    }else passwordErrorMessage = null;
+    } else
+      passwordErrorMessage = null;
     if (!email.contains('@')) {
       emailErrorMessage = "Invalid email";
       result = false;
-    }else emailErrorMessage = null;
+    } else
+      emailErrorMessage = null;
     return result;
   }
 }
