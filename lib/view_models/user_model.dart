@@ -125,9 +125,9 @@ class UserModel with ChangeNotifier implements AuthBase {
     }
   }
 
-  bool _emailPasswordControl(String email, String password) {
+  bool _emailPasswordControl(String email, [String password]) {
     var result = true;
-    if (password.length < 6) {
+    if (password != null && password.length < 6  ) {
       passwordErrorMessage = "The password should be 6 characters at least";
       result = false;
     } else
@@ -138,5 +138,21 @@ class UserModel with ChangeNotifier implements AuthBase {
     } else
       emailErrorMessage = null;
     return result;
+  }
+
+  @override
+
+  Future<void> sendForgotPassword(String email) async {
+    if (_emailPasswordControl(email)) {
+      state = ViewState.Busy;
+      await _userRepository.sendForgotPassword(email);
+    }
+
+    try {} catch (e) {
+      debugPrint("View modeldeki send forgot password hata: " + e.toString());
+      return null;
+    } finally {
+      state = ViewState.Idle;
+    }
   }
 }

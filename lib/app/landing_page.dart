@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:list_it_app/app/home_page.dart';
-import 'package:list_it_app/app/sign_in/sign_in_sign_up_page.dart';
+import 'package:list_it_app/app/register_pages/sign_in_sign_up_page.dart';
+
 import 'package:list_it_app/view_models/user_model.dart';
 import 'package:provider/provider.dart';
 

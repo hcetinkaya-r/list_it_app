@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class SignInButton extends StatelessWidget {
+class AppButton extends StatelessWidget {
   final String buttonText;
   final Color buttonColor;
   final Color textColor;
@@ -14,7 +14,7 @@ class SignInButton extends StatelessWidget {
   final double buttonTextSize;
   final VoidCallback onPressed;
 
-  const SignInButton(
+  const AppButton(
       {Key key,
       @required this.buttonText,
       this.buttonColor : Colors.white,

@@ -10,7 +10,6 @@ class FirebaseAuthService implements AuthBase {
   @override
   Future<AppUser> currentUser() async {
     try {
-
       return _userFromFirebase(user);
     } catch (e) {
       print("firebase auth service current user hata: " + e.toString());
@@ -20,7 +19,7 @@ class FirebaseAuthService implements AuthBase {
 
   AppUser _userFromFirebase(User user) {
     if (user == null) return null;
-    return AppUser(userID: user.uid);
+    return AppUser(userID: user.uid, email: user.email);
   }
 
   /*@override
@@ -57,8 +56,8 @@ class FirebaseAuthService implements AuthBase {
       if (_googleAuth.idToken != null && _googleAuth.accessToken != null) {
         UserCredential userCredential = await _firebaseAuth
             .signInWithCredential(GoogleAuthProvider.credential(
-            idToken: _googleAuth.idToken,
-            accessToken: _googleAuth.accessToken));
+                idToken: _googleAuth.idToken,
+                accessToken: _googleAuth.accessToken));
 
         User _user = userCredential.user;
 
@@ -97,5 +96,20 @@ class FirebaseAuthService implements AuthBase {
           e.toString());
       return null;
     }
+  }
+
+  @override
+  // ignore: missing_return
+  Future<void> sendForgotPassword(String email) async {
+
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+
+    } catch (e) {
+      print("firebase auth service send forgot password hata: " + e.toString());
+
+    }
+
+
   }
 }

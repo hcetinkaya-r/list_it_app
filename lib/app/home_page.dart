@@ -3,7 +3,7 @@ import 'package:list_it_app/models/app_user.dart';
 import 'package:list_it_app/view_models/user_model.dart';
 import 'package:provider/provider.dart';
 
-// ignore: must_be_immutable
+
 class HomePage extends StatelessWidget {
   final AppUser appUser;
 

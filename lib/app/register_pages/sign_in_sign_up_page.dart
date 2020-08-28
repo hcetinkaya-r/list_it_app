@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:list_it_app/app/register_pages/forgot_passoword_page.dart';
 import 'package:list_it_app/common_widget/flat_button.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
-import 'package:list_it_app/common_widget/sign_in_button.dart';
+import 'package:list_it_app/common_widget/app_button.dart';
 import 'package:list_it_app/models/app_user.dart';
 import 'package:list_it_app/view_models/user_model.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,7 @@ enum FormType { Register, Login }
 
 class _SignInSignUpPageState extends State<SignInSignUpPage> {
   String _email, _password;
-  String _butonText, _linkText;
+  String _buttonText, _linkText;
   String _textChange;
   var _formType = FormType.Login;
   bool _switchState = false;
@@ -45,7 +46,6 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
     setState(() {
       _formType =
           _formType == FormType.Login ? FormType.Register : FormType.Login;
-
     });
   }
 
@@ -62,17 +62,22 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
       print("google ile oturum acan user id: " + _appUser.userID.toString());
   }
 
+  void _goForgotPasswordPage(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => ForgotPasswordPage()));
+  }
+
 
 
   @override
   Widget build(BuildContext context) {
-    _butonText = _formType == FormType.Login ? "Log in" : "Sign up";
+    _buttonText = _formType == FormType.Login ? "Log in" : "Sign up";
     _linkText = _formType == FormType.Login ? "Sign up" : "Log in";
-    _textChange = _formType == FormType.Login ? "Don't have an account?" : "Do you have an account?";
-
+    _textChange = _formType == FormType.Login
+        ? "Don't have an account?"
+        : "Do you have an account?";
 
     final _userModel = Provider.of<UserModel>(context);
-
 
     return Scaffold(
       body: SafeArea(
@@ -117,8 +122,8 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
                                                 ? _userModel.emailErrorMessage
                                                 : null,
                                         prefixIcon: Icon(Icons.mail),
-                                        hintText: "Email",
-                                        labelText: "Email",
+                                        hintText: "e-mail",
+                                        labelText: "E-mail",
                                         border: OutlineInputBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(10)),
@@ -163,8 +168,8 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
                           children: <Widget>[
-                            SignInButton(
-                              buttonText: _butonText,
+                            AppButton(
+                              buttonText: _buttonText,
                               buttonTextSize: 24,
                               onPressed: () => _formSubmit(),
                             ),
@@ -191,15 +196,16 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
                                   buttonTextColor: Colors.grey.shade600,
                                   buttonText: "Forgot Password?",
                                   buttonTextWeight: FontWeight.bold,
-                                  onPressed: () {},
+                                  onPressed: () =>
+                                      _goForgotPasswordPage(context),
                                 ),
                               ],
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 10.0),
-                              child: SignInButton(
+                              child: AppButton(
                                 buttonColor: Colors.white,
-                                buttonText: "Sign in With Google",
+                                buttonText: "Sign in with Google",
                                 buttonTextSize: 16,
                                 textColor: Colors.black87,
                                 buttonIcon:
