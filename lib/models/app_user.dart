@@ -14,7 +14,7 @@ class AppUser {
 
   Map<String, dynamic> toMap() {
     return {
-      "userID": userID,
+      'userID': userID,
       'email': email,
       'userName': userName ?? '',
       'profilePhotoURL': profilePhotoURL ??

@@ -89,8 +89,7 @@ class UserModel with ChangeNotifier implements AuthBase {
     try {
       if (_emailPasswordControl(email, password)) {
         state = ViewState.Busy;
-        _appUser = await _userRepository.createUserWithEmailAndPassword(
-            email, password);
+        _appUser = await _userRepository.createUserWithEmailAndPassword(email, password);
         return _appUser;
       } else {
         return null;

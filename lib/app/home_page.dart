@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:list_it_app/app/custom_bottom_nav_bar.dart';
+import 'package:list_it_app/app/profile_page.dart';
+import 'package:list_it_app/app/tab_item.dart';
+import 'package:list_it_app/app/users_page.dart';
 import 'package:list_it_app/models/app_user.dart';
-import 'package:list_it_app/view_models/user_model.dart';
-import 'package:provider/provider.dart';
 
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final AppUser appUser;
-
 
   HomePage({
     Key key,
@@ -14,30 +15,40 @@ class HomePage extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  _HomePageState createState() => _HomePageState();
+}
 
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
+class _HomePageState extends State<HomePage> {
+  TabItem _currentTab = TabItem.Users;
 
-        title: Text("Main Page"),
-        actions: <Widget>[
-          FlatButton(
-              onPressed: () => _doSignOut(context), child: Text("Sign out"))
-        ],
-      ),
-      body: Center(
-        child: Text("Welcome... ${appUser.userID}"),
-      ),
-    );
+  Map<TabItem, GlobalKey<NavigatorState>> navigatorKeys = {
+    TabItem.Users : GlobalKey<NavigatorState>(),
+    TabItem.Profile : GlobalKey<NavigatorState>(),
+  };
+
+
+  Map<TabItem, Widget> allPages() {
+    return {
+      TabItem.Users: UsersPage(),
+      TabItem.Profile: ProfilePage(),
+    };
   }
 
-  Future<bool> _doSignOut(BuildContext context) async {
-    Provider.of<UserModel>(context, listen: false);
-
-    final _userModel = Provider.of<UserModel>(context, listen: false);
-    bool result = await _userModel.signOut();
-
-    return result;
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async => !await navigatorKeys[_currentTab].currentState.maybePop(),
+      child: CustomBottomNavBar(
+        pageBuilder: allPages(),
+        navigatorKeys: navigatorKeys,
+        currentTab: _currentTab,
+        onSelectedTab: (selectedTab) {
+          setState(() {
+            _currentTab = selectedTab;
+          });
+          print("Secilen tab item: " + selectedTab.toString());
+        },
+      ),
+    );
   }
 }

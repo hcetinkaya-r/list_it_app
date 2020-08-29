@@ -7,7 +7,7 @@ class FireStoreDBService implements DBBase {
 
   @override
   Future<bool> saveUser(AppUser appUser) async {
-    Map _userToAddMap = appUser.toMap();
+    //Map _userToAddMap = appUser.toMap();
 
     /*_userToAddMap['createdAt'] = FieldValue.serverTimestamp();
     _userToAddMap['updatedAt'] = FieldValue.serverTimestamp();
@@ -27,7 +27,7 @@ class FireStoreDBService implements DBBase {
 
     Map _appUserInfRead = _appUserRead.data();
     AppUser _appUserInfReadObj = AppUser.fromMap(_appUserInfRead);
-    print("Okunan appUser nesnesi: " + _appUserInfReadObj.toString());
+    print("Okunan AppUser nesnesi: " + _appUserInfReadObj.toString());
 
     return true;
   }
