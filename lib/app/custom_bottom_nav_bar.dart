@@ -24,6 +24,7 @@ class CustomBottomNavBar extends StatelessWidget {
         items: [
           _createNavItem(TabItem.Users),
           _createNavItem(TabItem.Profile),
+
         ],
         onTap: (index) => onSelectedTab(TabItem.values[index]),
       ),

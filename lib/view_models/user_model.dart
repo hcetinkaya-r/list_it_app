@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:list_it_app/locator.dart';
 import 'package:list_it_app/models/app_user.dart';
@@ -31,7 +33,9 @@ class UserModel with ChangeNotifier implements AuthBase {
     try {
       state = ViewState.Busy;
       _appUser = await _userRepository.currentUser();
+      if(_appUser != null)
       return _appUser;
+      else return null;
     } catch (e) {
       debugPrint("View modeldeki current user hata: " + e.toString());
       return null;
@@ -148,9 +152,16 @@ class UserModel with ChangeNotifier implements AuthBase {
   }
 
   Future<bool> updateUserName(String userID, String newUserName) async {
-    state = ViewState.Busy;
+
     var result = await _userRepository.updateUserName(userID, newUserName);
-    state=ViewState.Idle;
+    if(result){
+      _appUser.userName = newUserName;
+    }
     return result;
+  }
+
+  Future<String>uploadFile(String userID, String fileType, File profilePhoto) async{
+    var photoLink = await _userRepository.uploadFile(userID, fileType, profilePhoto);
+    return photoLink;
   }
 }

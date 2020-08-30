@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:list_it_app/app/custom_bottom_nav_bar.dart';
-import 'package:list_it_app/app/profile_page.dart';
+import 'package:list_it_app/app/app_page/profile_page.dart';
 import 'package:list_it_app/app/tab_item.dart';
 import 'package:list_it_app/app/users_page.dart';
 import 'package:list_it_app/models/app_user.dart';

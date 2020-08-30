@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:list_it_app/models/app_user.dart';
-import 'package:list_it_app/services/db_base.dart';
+import 'package:list_it_app/services/database_base.dart';
 
 class FireStoreDBService implements DBBase {
   final FirebaseFirestore _firestoreDB = FirebaseFirestore.instance;
-
 
   @override
   Future<bool> saveUser(AppUser appUser) async {
@@ -22,9 +21,8 @@ class FireStoreDBService implements DBBase {
         .doc(appUser.userID)
         .set(appUser.toMap());
 
-
     /*.set(_userToAddMap);*/
-   /* DocumentSnapshot _appUserRead =
+    /* DocumentSnapshot _appUserRead =
         await FirebaseFirestore.instance.doc("users/${appUser.userID}").get();
     Map _appUserInfRead = _appUserRead.data();
     AppUser _appUserInfReadObj = AppUser.fromMap(_appUserInfRead);
@@ -35,7 +33,8 @@ class FireStoreDBService implements DBBase {
 
   @override
   Future<AppUser> readUser(String userID) async {
-    DocumentSnapshot _appUserRead = await _firestoreDB.collection("users").doc(userID).get();
+    DocumentSnapshot _appUserRead =
+        await _firestoreDB.collection("users").doc(userID).get();
     Map<String, dynamic> _appUserInfReadMap = _appUserRead.data();
 
     AppUser _appUserInfReadObj = AppUser.fromMap(_appUserInfReadMap);
@@ -45,13 +44,29 @@ class FireStoreDBService implements DBBase {
 
   @override
   Future<bool> updateUserName(String userID, String newUserName) async {
-    var users = await _firestoreDB.collection("users").where("userName", isEqualTo: newUserName).get();
-    if(users.docs.length>=1){
+    var users = await _firestoreDB
+        .collection("users")
+        .where("userName", isEqualTo: newUserName)
+        .get();
+    if (users.docs.length >= 1) {
       return false;
-    }else{
-      await _firestoreDB.collection("users").doc(userID).update({'userName':newUserName});
+    } else {
+      await _firestoreDB
+          .collection("users")
+          .doc(userID)
+          .update({'userName': newUserName});
       return true;
     }
   }
 
-}
+  @override
+  Future<bool> updateProfilePhoto(String userID, String profilePhotoURL) async {
+
+      await _firestoreDB
+          .collection("users")
+          .doc(userID)
+          .update({'profilePhotoURL': profilePhotoURL});
+      return true;
+    }
+  }
+

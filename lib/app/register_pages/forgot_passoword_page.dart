@@ -21,6 +21,7 @@ class ForgotPasswordPage extends StatelessWidget {
     final _userModel = Provider.of<UserModel>(context);
 
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,

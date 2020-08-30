@@ -18,12 +18,11 @@ class SensitivePlatformAlertDialog extends SensitivePlatformWidget {
   Future<bool> show(BuildContext context) async {
     return Platform.isIOS
         ? await showCupertinoDialog<bool>(
-        context: context, builder: (context) => this)
+            context: context, builder: (context) => this)
         : await showDialog<bool>(
       context: context,
-      builder: (context) => this,
-      barrierDismissible: false,
-    );
+            builder: (context) => this,
+            barrierDismissible: false);
   }
 
   @override

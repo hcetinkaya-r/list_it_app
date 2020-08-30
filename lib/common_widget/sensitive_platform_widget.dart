@@ -10,7 +10,9 @@ abstract class SensitivePlatformWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
       return buildIOSWidget(context);
+    }else{
+      return buildAndroidWidget(context);
     }
-    return buildAndroidWidget(context);
+
   }
 }

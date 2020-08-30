@@ -1,18 +1,22 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:list_it_app/locator.dart';
 import 'package:list_it_app/models/app_user.dart';
 import 'package:list_it_app/services/auth_base.dart';
 import 'package:list_it_app/services/fake_auth_service.dart';
-import 'package:list_it_app/services/fire_store_db_service.dart';
+import 'package:list_it_app/services/firestore_db_service.dart';
 import 'package:list_it_app/services/firebase_auth_service.dart';
+import 'package:list_it_app/services/firebase_storage_service.dart';
 
 enum AppMode { DEBUG, RELEASE }
 
 class UserRepository implements AuthBase {
   FirebaseAuthService _firebaseAuthService = locator<FirebaseAuthService>();
-  FakeAuthenticationService _fakeAuthenticationService =
-      locator<FakeAuthenticationService>();
+  FakeAuthenticationService _fakeAuthenticationService = locator<FakeAuthenticationService>();
   FireStoreDBService _fireStoreDBService = locator<FireStoreDBService>();
+  FirebaseStorageService _firebaseStorageService = locator<FirebaseStorageService>();
 
   AppMode appMode = AppMode.RELEASE;
 
@@ -107,6 +111,23 @@ class UserRepository implements AuthBase {
     }else{
       return await _fireStoreDBService.updateUserName(userID, newUserName);
     }
+
+  }
+
+  Future<String> uploadFile(String userID, String fileType, File profilePhoto) async {
+    if(appMode == AppMode.DEBUG) {
+      return "Dosya indirme linki";
+    }else{
+
+      var profilePhotoURL = await _firebaseStorageService.uploadFile(userID, fileType, profilePhoto);
+      await _fireStoreDBService.updateProfilePhoto(userID, profilePhotoURL);
+      return profilePhotoURL;
+
+
+
+
+    }
+
 
   }
 }

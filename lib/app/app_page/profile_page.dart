@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:list_it_app/common_widget/app_button.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
 import 'package:list_it_app/common_widget/sensitive_platform_alert_dialog.dart';
@@ -12,6 +15,8 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   TextEditingController _controllerUserName;
+  File _profilePhoto;
+  final picker = ImagePicker();
 
   @override
   void initState() {
@@ -26,6 +31,45 @@ class _ProfilePageState extends State<ProfilePage> {
     super.dispose();
   }
 
+  void _takePhoto() async {
+    var newPhoto = await picker.getImage(source: ImageSource.camera);
+
+    setState(() {
+      _profilePhoto = File(newPhoto.path);
+      Navigator.of(context).pop();
+    });
+  }
+
+  void _photoArchive() async {
+    var newPhoto = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      _profilePhoto = File(newPhoto.path);
+      Navigator.of(context).pop();
+    });
+  }
+
+  void _updateProfilePhoto(BuildContext context) async {
+    final _userModel = Provider.of<UserModel>(context, listen: false);
+    if(_profilePhoto != null){
+      var url = await _userModel.uploadFile(_userModel.appUser.userID, "profile_photo", _profilePhoto);
+
+      if(url != null){
+        SensitivePlatformAlertDialog(
+          title: "Successful",
+          content:
+          "Your profile photo has been updated",
+          rightButtonText: "OK",
+        ).show(context);
+
+      }
+    }
+
+
+
+
+  }
+
   @override
   Widget build(BuildContext context) {
     UserModel _userModel = Provider.of<UserModel>(context);
@@ -34,17 +78,17 @@ class _ProfilePageState extends State<ProfilePage> {
         _userModel.appUser.toString()); // test
 
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
-        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         title: Text("Profile"),
         actions: <Widget>[
           FlatButton(
+            textColor: Theme.of(context).primaryColor,
             onPressed: () => _askForConfirmSignOut(context),
             child: Text(
-              "SignOut",
-              style: TextStyle(color: Colors.white),
+              "Sign Out",
             ),
           ),
         ],
@@ -71,11 +115,41 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.black54,
                       ),
                     ),
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundColor: Colors.white,
-                      backgroundImage:
-                          NetworkImage(_userModel.appUser.profilePhotoURL),
+                    GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return Container(
+                                height: 200,
+                                child: Column(
+                                  children: <Widget>[
+                                    ListTile(
+                                      leading: Icon(Icons.camera),
+                                      title: Text("Take Photo"),
+                                      onTap: () {
+                                        _takePhoto();
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: Icon(Icons.photo_album),
+                                      title: Text("PhotoArchive"),
+                                      onTap: () {
+                                        _photoArchive();
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            });
+                      },
+                      child: CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Colors.white,
+                        backgroundImage: _profilePhoto == null
+                            ? NetworkImage(_userModel.appUser.profilePhotoURL)
+                            : FileImage(_profilePhoto),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -108,6 +182,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         buttonText: "Save",
                         onPressed: () {
                           _updateUserName(context);
+                          _updateProfilePhoto(context);
                         }),
                   ],
                 ),
@@ -124,8 +199,6 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<bool> _doSignOut(BuildContext context) async {
-    Provider.of<UserModel>(context, listen: false);
-
     final _userModel = Provider.of<UserModel>(context, listen: false);
     bool result = await _userModel.signOut();
 
@@ -149,28 +222,26 @@ class _ProfilePageState extends State<ProfilePage> {
     final _userModel = Provider.of<UserModel>(context, listen: false);
 
     if (_userModel.appUser.userName != _controllerUserName.text) {
-     var updateResult =  await _userModel.updateUserName(_userModel.appUser.userID, _controllerUserName.text);
+      var updateResult = await _userModel.updateUserName(
+          _userModel.appUser.userID, _controllerUserName.text);
 
-     if(updateResult == true){
-       SensitivePlatformAlertDialog(
-         title: "Successful",
-         rightButtonText: "Username has been changed",
-       ).show(context);
-     }else{
-       SensitivePlatformAlertDialog(
-         title: "Error",
-         rightButtonText: "This username is already in use, please choose a different username",
-       ).show(context);
-
-     }
-
-    } else {
-      SensitivePlatformAlertDialog(
-        title: "Error",
-        rightButtonText: "You did not change your username",
-      ).show(context);
+      if (updateResult == true) {
+        SensitivePlatformAlertDialog(
+          title: "Successful",
+          content: "Username has been changed",
+          rightButtonText: "OK",
+        ).show(context);
+      } else {
+        _controllerUserName.text = _userModel.appUser.userName;
+        SensitivePlatformAlertDialog(
+          title: "Error",
+          content:
+              "This username is already in use, please choose a different username",
+          rightButtonText: "OK",
+        ).show(context);
+      }
     }
-
-
   }
+
+
 }

@@ -52,5 +52,11 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To access photo library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>To access camera</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To access microphone</string>
 </dict>
 </plist>

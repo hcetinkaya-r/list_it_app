@@ -57,11 +57,10 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
           print("Olusturulan user id: " + _createdAppUser.userID.toString());
       } on FirebaseAuthException catch (e) {
         print("KULLANICI OLUŞTURMA HATA: " + Errors.showError(e.code));
-        SensitivePlatformAlertDialog(
+     SensitivePlatformAlertDialog(
                 title: "Create user error",
                 content: Errors.showError(e.code),
-                rightButtonText: "OK")
-            .show(context);
+                rightButtonText: "OK").show(context);
       }
     }
   }
@@ -102,6 +101,7 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
     final _userModel = Provider.of<UserModel>(context);
 
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: SafeArea(
         child: Stack(
           children: <Widget>[
