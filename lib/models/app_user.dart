@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -16,7 +18,7 @@ class AppUser {
     return {
       'userID': userID,
       'email': email,
-      'userName': userName ?? '',
+      'userName': userName ?? email.substring(0, email.indexOf('@')) + randomGenerateNumber(),
       'profilePhotoURL': profilePhotoURL ??
           'https://party.coop/wp-content/blogs.dir/5/files/2020/02/Love-It-Bright-560x342.png',
       'createdAt': createdAt ?? FieldValue.serverTimestamp(),
@@ -38,5 +40,10 @@ class AppUser {
   @override
   String toString() {
     return 'AppUser{userID: $userID, email: $email, userName: $userName, profilePhotoURL: $profilePhotoURL, createdAt: $createdAt, updatedAt: $updatedAt, level: $level}';
+  }
+
+  String randomGenerateNumber() {
+    int randomNumber = Random().nextInt(999999);
+    return randomNumber.toString();
   }
 }

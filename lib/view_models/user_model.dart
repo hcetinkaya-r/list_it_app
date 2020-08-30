@@ -86,21 +86,18 @@ class UserModel with ChangeNotifier implements AuthBase {
   @override
   Future<AppUser> createUserWithEmailAndPassword(
       String email, String password) async {
-    try {
-      if (_emailPasswordControl(email, password)) {
+    if (_emailPasswordControl(email, password)) {
+      try {
         state = ViewState.Busy;
-        _appUser = await _userRepository.createUserWithEmailAndPassword(email, password);
+        _appUser = await _userRepository.createUserWithEmailAndPassword(
+            email, password);
+
         return _appUser;
-      } else {
-        return null;
+      } finally {
+        state = ViewState.Idle;
       }
-    } catch (e) {
-      debugPrint(
-          "View modeldeki user model create user email and password hata: " +
-              e.toString());
+    } else {
       return null;
-    } finally {
-      state = ViewState.Idle;
     }
   }
 
@@ -115,10 +112,6 @@ class UserModel with ChangeNotifier implements AuthBase {
         return _appUser;
       } else
         return null;
-    } catch (e) {
-      debugPrint("View modeldeki user model sign in with email and password: " +
-          e.toString());
-      return null;
     } finally {
       state = ViewState.Idle;
     }
@@ -126,7 +119,7 @@ class UserModel with ChangeNotifier implements AuthBase {
 
   bool _emailPasswordControl(String email, [String password]) {
     var result = true;
-    if (password != null && password.length < 6  ) {
+    if (password != null && password.length < 6) {
       passwordErrorMessage = "The password should be 6 characters at least";
       result = false;
     } else
@@ -140,7 +133,6 @@ class UserModel with ChangeNotifier implements AuthBase {
   }
 
   @override
-
   Future<void> sendForgotPassword(String email) async {
     if (_emailPasswordControl(email)) {
       state = ViewState.Busy;
@@ -153,5 +145,12 @@ class UserModel with ChangeNotifier implements AuthBase {
     } finally {
       state = ViewState.Idle;
     }
+  }
+
+  Future<bool> updateUserName(String userID, String newUserName) async {
+    state = ViewState.Busy;
+    var result = await _userRepository.updateUserName(userID, newUserName);
+    state=ViewState.Idle;
+    return result;
   }
 }

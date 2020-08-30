@@ -1,10 +1,16 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:list_it_app/app/hata_exception.dart';
 import 'package:list_it_app/app/register_pages/forgot_passoword_page.dart';
 import 'package:list_it_app/common_widget/flat_button.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
 import 'package:list_it_app/common_widget/app_button.dart';
+import 'package:list_it_app/common_widget/sensitive_platform_alert_dialog.dart';
 import 'package:list_it_app/models/app_user.dart';
 import 'package:list_it_app/view_models/user_model.dart';
 import 'package:provider/provider.dart';
@@ -30,15 +36,33 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
     final _userModel = Provider.of<UserModel>(context, listen: false);
 
     if (_formType == FormType.Login) {
-      AppUser _loggedInAppUser =
-          await _userModel.signInWithEmailAndPassword(_email, _password);
-      if (_loggedInAppUser != null)
-        print("Oturum açan user id: " + _loggedInAppUser.userID.toString());
+      try {
+        AppUser _loggedInAppUser =
+            await _userModel.signInWithEmailAndPassword(_email, _password);
+        if (_loggedInAppUser != null)
+          print("Oturum açan user id: " + _loggedInAppUser.userID.toString());
+      } on FirebaseAuthException catch (e) {
+        print("OTURUM AÇMA HATA: " + Errors.showError(e.code));
+        SensitivePlatformAlertDialog(
+            title: "SİGN IN ERROR",
+            content: Errors.showError(e.code),
+            rightButtonText: "OK")
+            .show(context);
+      }
     } else {
-      AppUser _createdAppUser =
-          await _userModel.createUserWithEmailAndPassword(_email, _password);
-      if (_createdAppUser != null)
-        print("Olusturulan user id: " + _createdAppUser.userID.toString());
+      try {
+        AppUser _createdAppUser =
+            await _userModel.createUserWithEmailAndPassword(_email, _password);
+        if (_createdAppUser != null)
+          print("Olusturulan user id: " + _createdAppUser.userID.toString());
+      } on FirebaseAuthException catch (e) {
+        print("KULLANICI OLUŞTURMA HATA: " + Errors.showError(e.code));
+        SensitivePlatformAlertDialog(
+                title: "Create user error",
+                content: Errors.showError(e.code),
+                rightButtonText: "OK")
+            .show(context);
+      }
     }
   }
 
@@ -49,7 +73,7 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
     });
   }
 
-  /*void _guestLogin(BuildContext context) async {
+/*void _guestLogin(BuildContext context) async {
     final _userModel = Provider.of<UserModel>(context, listen: false);
     AppUser _appUser = await _userModel.signInAnonymously();
     print("misafir oturumu acan user id: " + _appUser.userID.toString());
@@ -66,8 +90,6 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => ForgotPasswordPage()));
   }
-
-
 
   @override
   Widget build(BuildContext context) {

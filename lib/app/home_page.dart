@@ -5,7 +5,6 @@ import 'package:list_it_app/app/tab_item.dart';
 import 'package:list_it_app/app/users_page.dart';
 import 'package:list_it_app/models/app_user.dart';
 
-
 class HomePage extends StatefulWidget {
   final AppUser appUser;
 
@@ -22,10 +21,9 @@ class _HomePageState extends State<HomePage> {
   TabItem _currentTab = TabItem.Users;
 
   Map<TabItem, GlobalKey<NavigatorState>> navigatorKeys = {
-    TabItem.Users : GlobalKey<NavigatorState>(),
-    TabItem.Profile : GlobalKey<NavigatorState>(),
+    TabItem.Users: GlobalKey<NavigatorState>(),
+    TabItem.Profile: GlobalKey<NavigatorState>(),
   };
-
 
   Map<TabItem, Widget> allPages() {
     return {
@@ -37,15 +35,23 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => !await navigatorKeys[_currentTab].currentState.maybePop(),
+      onWillPop: () async =>
+          !await navigatorKeys[_currentTab].currentState.maybePop(),
       child: CustomBottomNavBar(
         pageBuilder: allPages(),
         navigatorKeys: navigatorKeys,
         currentTab: _currentTab,
         onSelectedTab: (selectedTab) {
-          setState(() {
-            _currentTab = selectedTab;
-          });
+          if (selectedTab == _currentTab) {
+            navigatorKeys[selectedTab]
+                .currentState
+                .popUntil((route) => route.isFirst);
+          } else {
+            setState(() {
+              _currentTab = selectedTab;
+            });
+          }
+
           print("Secilen tab item: " + selectedTab.toString());
         },
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:list_it_app/app/ornek_page_1.dart';
 
+
 class UsersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -11,10 +12,11 @@ class UsersPage extends StatelessWidget {
           IconButton(
               icon: Icon(Icons.title),
               onPressed: () {
-                Navigator.of(context,rootNavigator: true).push(
-                    MaterialPageRoute(fullscreenDialog: true, builder: (context) => OrnekPage1()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => OrnekPage1()));
               }),
         ],
+
 
 
       ),

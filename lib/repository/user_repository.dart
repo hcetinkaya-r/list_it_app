@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:list_it_app/locator.dart';
 import 'package:list_it_app/models/app_user.dart';
 import 'package:list_it_app/services/auth_base.dart';
@@ -20,7 +21,10 @@ class UserRepository implements AuthBase {
     if (appMode == AppMode.DEBUG) {
       return await _fakeAuthenticationService.currentUser();
     } else {
-      return await _firebaseAuthService.currentUser();
+      AppUser _appUser = await _firebaseAuthService.currentUser();
+      return await _fireStoreDBService.readUser(_appUser.userID);
+
+
     }
   }
 
@@ -51,7 +55,7 @@ class UserRepository implements AuthBase {
       bool _result = await _fireStoreDBService.saveUser(_appUser);
 
       if (_result) {
-        return _appUser;
+        return await _fireStoreDBService.readUser(_appUser.userID);
       } else
         return null;
     }
@@ -69,7 +73,7 @@ class UserRepository implements AuthBase {
       bool _result = await _fireStoreDBService.saveUser(_appUser);
 
       if (_result) {
-        return _appUser;
+        return await _fireStoreDBService.readUser(_appUser.userID);
       } else
         return null;
     }
@@ -82,8 +86,9 @@ class UserRepository implements AuthBase {
       return await _fakeAuthenticationService.signInWithEmailAndPassword(
           email, password);
     } else {
-      return await _firebaseAuthService.signInWithEmailAndPassword(
+      AppUser _appUser = await _firebaseAuthService.signInWithEmailAndPassword(
           email, password);
+      return await _fireStoreDBService.readUser(_appUser.userID);
     }
   }
 
@@ -94,5 +99,14 @@ class UserRepository implements AuthBase {
     } else {
       _firebaseAuthService.sendForgotPassword(email);
     }
+  }
+
+  Future<bool> updateUserName(String userID, String newUserName) async {
+    if(appMode == AppMode.DEBUG){
+      return false;
+    }else{
+      return await _fireStoreDBService.updateUserName(userID, newUserName);
+    }
+
   }
 }
