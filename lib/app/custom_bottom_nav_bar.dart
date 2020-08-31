@@ -19,11 +19,19 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
+
       tabBar: CupertinoTabBar(
-        activeColor: Color(0xFFA30003),
+        iconSize: 40,
+        border: Border(top: BorderSide(color: Theme.of(context).primaryColor),),
+
+        backgroundColor: Colors.white,
+        activeColor: Theme.of(context).primaryColor,
         items: [
           _createNavItem(TabItem.Users),
+
           _createNavItem(TabItem.Profile),
+          _createNavItem(TabItem.Assistant),
+
 
         ],
         onTap: (index) => onSelectedTab(TabItem.values[index]),

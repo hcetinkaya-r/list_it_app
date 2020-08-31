@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:list_it_app/common_widget/app_button.dart';
@@ -51,23 +51,18 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _updateProfilePhoto(BuildContext context) async {
     final _userModel = Provider.of<UserModel>(context, listen: false);
-    if(_profilePhoto != null){
-      var url = await _userModel.uploadFile(_userModel.appUser.userID, "profile_photo", _profilePhoto);
+    if (_profilePhoto != null) {
+      var url = await _userModel.uploadFile(
+          _userModel.appUser.userID, "profile_photo", _profilePhoto);
 
-      if(url != null){
+      if (url != null) {
         SensitivePlatformAlertDialog(
           title: "Successful",
-          content:
-          "Your profile photo has been updated",
+          content: "Your profile photo has been updated",
           rightButtonText: "OK",
         ).show(context);
-
       }
     }
-
-
-
-
   }
 
   @override
@@ -82,15 +77,14 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
-        title: Text("Profile"),
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         actions: <Widget>[
-          FlatButton(
-            textColor: Theme.of(context).primaryColor,
-            onPressed: () => _askForConfirmSignOut(context),
-            child: Text(
-              "Sign Out",
-            ),
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: IconButton(icon: Icon(Icons.exit_to_app), onPressed: () => _askForConfirmSignOut(context),),
           ),
+
+
         ],
       ),
       body: Column(
@@ -100,86 +94,98 @@ class _ProfilePageState extends State<ProfilePage> {
               Container(
                 margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
                 padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
-                height: MediaQuery.of(context).size.height / 2,
+                height: MediaQuery.of(context).size.height / 1.4,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   border: Border.all(color: Theme.of(context).primaryColor),
                 ),
                 child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      "User Profile",
-                      style: TextStyle(
-                        fontSize: 36,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                            context: context,
-                            builder: (context) {
-                              return Container(
-                                height: 200,
-                                child: Column(
-                                  children: <Widget>[
-                                    ListTile(
-                                      leading: Icon(Icons.camera),
-                                      title: Text("Take Photo"),
-                                      onTap: () {
-                                        _takePhoto();
-                                      },
-                                    ),
-                                    ListTile(
-                                      leading: Icon(Icons.photo_album),
-                                      title: Text("PhotoArchive"),
-                                      onTap: () {
-                                        _photoArchive();
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              );
-                            });
-                      },
-                      child: CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.white,
-                        backgroundImage: _profilePhoto == null
-                            ? NetworkImage(_userModel.appUser.profilePhotoURL)
-                            : FileImage(_profilePhoto),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        initialValue: _userModel.appUser.email,
-                        readOnly: true,
-                        decoration: InputDecoration(
-                          labelText: "Your E-Mail",
-                          prefixIcon: Icon(Icons.email),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          "User Profile",
+                          style: TextStyle(
+                            fontSize: 36,
+                            color: Colors.black54,
                           ),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: _controllerUserName,
-                        decoration: InputDecoration(
-                          labelText: "Your User Name",
-                          prefixIcon: Icon(Icons.drive_file_rename_outline),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                        SizedBox(height:20),
+                        GestureDetector(
+                          onTap: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return Container(
+                                    height: 200,
+                                    child: Column(
+                                      children: <Widget>[
+                                        ListTile(
+                                          leading: Icon(Icons.camera),
+                                          title: Text("Take Photo"),
+                                          onTap: () {
+                                            _takePhoto();
+                                          },
+                                        ),
+                                        ListTile(
+                                          leading: Icon(Icons.photo_album),
+                                          title: Text("PhotoArchive"),
+                                          onTap: () {
+                                            _photoArchive();
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                });
+                          },
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.white,
+                            backgroundImage: _profilePhoto == null
+                                ? NetworkImage(
+                                    _userModel.appUser.profilePhotoURL)
+                                : FileImage(_profilePhoto),
                           ),
                         ),
-                      ),
+                        SizedBox(height:20),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            initialValue: _userModel.appUser.email,
+                            readOnly: true,
+                            decoration: InputDecoration(
+                              labelText: "Your E-Mail",
+                              prefixIcon: Icon(Icons.email),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            controller: _controllerUserName,
+                            decoration: InputDecoration(
+                              labelText: "Your User Name",
+                              prefixIcon: Icon(Icons.drive_file_rename_outline),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
+
                     AppButton(
                         buttonText: "Save",
+                        textColor: Colors.white,
+                        buttonColor: Theme.of(context).primaryColor,
                         onPressed: () {
                           _updateUserName(context);
                           _updateProfilePhoto(context);
@@ -192,7 +198,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: PageAvatar(),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -242,6 +248,4 @@ class _ProfilePageState extends State<ProfilePage> {
       }
     }
   }
-
-
 }

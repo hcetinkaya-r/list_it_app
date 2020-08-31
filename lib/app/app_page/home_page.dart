@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:list_it_app/app/app_page/assistant_page.dart';
 import 'package:list_it_app/app/custom_bottom_nav_bar.dart';
 import 'package:list_it_app/app/app_page/profile_page.dart';
 import 'package:list_it_app/app/tab_item.dart';
@@ -23,12 +24,15 @@ class _HomePageState extends State<HomePage> {
   Map<TabItem, GlobalKey<NavigatorState>> navigatorKeys = {
     TabItem.Users: GlobalKey<NavigatorState>(),
     TabItem.Profile: GlobalKey<NavigatorState>(),
+    TabItem.Assistant: GlobalKey<NavigatorState>(),
   };
 
   Map<TabItem, Widget> allPages() {
     return {
       TabItem.Users: UsersPage(),
+      TabItem.Assistant : AssistantPage(),
       TabItem.Profile: ProfilePage(),
+
     };
   }
 
@@ -38,6 +42,7 @@ class _HomePageState extends State<HomePage> {
       onWillPop: () async =>
           !await navigatorKeys[_currentTab].currentState.maybePop(),
       child: CustomBottomNavBar(
+
         pageBuilder: allPages(),
         navigatorKeys: navigatorKeys,
         currentTab: _currentTab,

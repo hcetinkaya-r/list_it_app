@@ -1,7 +1,4 @@
 import 'dart:io';
-
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:list_it_app/locator.dart';
 import 'package:list_it_app/models/app_user.dart';
 import 'package:list_it_app/services/auth_base.dart';
