@@ -1,24 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:list_it_app/locator.dart';
 import 'package:list_it_app/models/note.dart';
-import 'package:list_it_app/repository/note_repository.dart';
+import 'package:list_it_app/services/firestore_db_service.dart';
 import 'package:list_it_app/services/note_base.dart';
 
-enum ViewState{Specified, Pinned, Deleted}
 
-class NoteModel with ChangeNotifier implements NoteBase{
-  NoteRepository _noteRepository = locator<NoteRepository>();
-  ViewState _state = ViewState.Specified;
-  Note _note;
 
-  Note get note => _note;
+class NoteRepository implements NoteBase{
+  FireStoreDBService _fireStoreDBService = locator<FireStoreDBService>();
 
-  ViewState get state => _state;
-
-  set state(ViewState value) {
-    _state = value;
-    notifyListeners();
-  }
 
   @override
   Future<String> addNote(Note note) {
@@ -49,6 +38,11 @@ class NoteModel with ChangeNotifier implements NoteBase{
     // TODO: implement updateNote
     throw UnimplementedError();
   }
+
+
+
+
+
 
 
 

@@ -1,21 +1,20 @@
-import 'package:flutter/cupertino.dart';
-
-class Category {
-  final String categoryID;
+class Category{
+  String categoryID;
   String categoryName;
 
-  Category({@required this.categoryID, @required this.categoryName});
+  Category({this.categoryID, this.categoryName});
 
   Map<String, dynamic> toMap() {
-    return {
-      'categoryID': categoryID,
-      'categoryName': categoryName,
-    };
+    var map = Map<String, dynamic>();
+    map['categoryID'] = categoryID;
+    map['categoryNAme'] = categoryName;
+    return map;
   }
 
-  Category.fromMap(Map<String, dynamic> map)
-      : categoryID = map['categoryID'],
-        categoryName = map['categoryName'];
+  Category.fromMap(Map<String, dynamic> map) {
+    this.categoryID = map['categoryID'];
+    this.categoryName = map['categoryNAme'];
+  }
 
   @override
   String toString() {

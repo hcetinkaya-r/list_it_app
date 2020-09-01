@@ -1,6 +1,8 @@
 
 
 import 'package:get_it/get_it.dart';
+import 'package:list_it_app/repository/category_repository.dart';
+import 'package:list_it_app/repository/note_repository.dart';
 import 'package:list_it_app/repository/user_repository.dart';
 import 'package:list_it_app/services/fake_auth_service.dart';
 import 'package:list_it_app/services/firestore_db_service.dart';
@@ -16,6 +18,9 @@ void setupLocator(){
   locator.registerLazySingleton(() => UserRepository());
   locator.registerLazySingleton(() => FireStoreDBService());
   locator.registerLazySingleton(() => FirebaseStorageService());
+  locator.registerLazySingleton(() => NoteRepository());
+  locator.registerLazySingleton(() => CategoryRepository());
+
 
 
 }

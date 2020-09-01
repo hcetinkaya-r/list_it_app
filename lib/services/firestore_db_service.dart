@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:list_it_app/models/app_user.dart';
+import 'package:list_it_app/models/note.dart';
+
+
 import 'package:list_it_app/services/database_base.dart';
 
 class FireStoreDBService implements DBBase {
@@ -61,12 +64,63 @@ class FireStoreDBService implements DBBase {
 
   @override
   Future<bool> updateProfilePhoto(String userID, String profilePhotoURL) async {
-
-      await _firestoreDB
-          .collection("users")
-          .doc(userID)
-          .update({'profilePhotoURL': profilePhotoURL});
-      return true;
-    }
+    await _firestoreDB
+        .collection("users")
+        .doc(userID)
+        .update({'profilePhotoURL': profilePhotoURL});
+    return true;
   }
 
+  @override
+  Future<bool> saveNote(Note note) async {
+
+    await _firestoreDB
+        .collection('notes')
+        .doc(note.noteID)
+        .set(note.toMap());
+  }
+
+  @override
+  Future<Note> readNote(String noteID) async {
+    DocumentSnapshot _noteRead =
+    await _firestoreDB.collection("notes").doc(noteID).get();
+    Map<String, dynamic> _noteInfReadMap = _noteRead.data();
+
+    Note _noteInfReadObj = Note.fromMap(_noteInfReadMap);
+    print("Okunan note nesnesi: " + _noteInfReadObj.toString());
+    return _noteInfReadObj;
+  }
+
+  @override
+  Future<Note> addNote(String noteID, String noteTitle, String noteContent) {
+    // TODO: implement addNote
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> deleteNote(String noteID) {
+    // TODO: implement deleteNote
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> updateNote(String noteID, String newNoteTitle, String newNoteContent) {
+    // TODO: implement updateNote
+    throw UnimplementedError();
+  }
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

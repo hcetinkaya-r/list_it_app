@@ -1,5 +1,6 @@
 import 'package:list_it_app/models/app_user.dart';
 
+
 abstract class AuthBase {
   Future<AppUser> currentUser();
 
@@ -10,4 +11,8 @@ abstract class AuthBase {
   Future<AppUser> signInWithEmailAndPassword(String email, String password);
   Future<AppUser> createUserWithEmailAndPassword(String email, String password);
   Future<void> sendForgotPassword(String email);
-}
+
+
+
+  }
+
