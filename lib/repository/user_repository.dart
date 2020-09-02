@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:list_it_app/locator.dart';
 import 'package:list_it_app/models/app_user.dart';
-import 'package:list_it_app/services/auth_base.dart';
+import 'package:list_it_app/services/firebase/auth_base.dart';
 import 'package:list_it_app/services/fake_auth_service.dart';
-import 'package:list_it_app/services/firestore_db_service.dart';
-import 'package:list_it_app/services/firebase_auth_service.dart';
-import 'package:list_it_app/services/firebase_storage_service.dart';
+import 'package:list_it_app/services/firebase/firestore_db_service.dart';
+import 'package:list_it_app/services/firebase/firebase_auth_service.dart';
+import 'package:list_it_app/services/firebase/firebase_storage_service.dart';
 
 enum AppMode { DEBUG, RELEASE }
 

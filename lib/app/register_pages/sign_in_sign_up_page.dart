@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:list_it_app/app/hata_exception.dart';
+import 'package:list_it_app/models/hata_exception.dart';
 import 'package:list_it_app/app/register_pages/forgot_passoword_page.dart';
 import 'package:list_it_app/common_widget/flat_button.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';

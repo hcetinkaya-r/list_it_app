@@ -1,0 +1,1 @@
+enum BudgetPageState { Idle, Busy }

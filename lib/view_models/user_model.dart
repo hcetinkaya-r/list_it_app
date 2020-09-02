@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:list_it_app/locator.dart';
 import 'package:list_it_app/models/app_user.dart';
 import 'package:list_it_app/repository/user_repository.dart';
-import 'package:list_it_app/services/auth_base.dart';
+import 'package:list_it_app/services/firebase/auth_base.dart';
 
 enum ViewState { Idle, Busy }
 

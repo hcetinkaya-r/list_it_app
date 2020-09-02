@@ -179,8 +179,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
+                        Text("You can change your user name", style: TextStyle(color: Colors.black54),),
                       ],
                     ),
+
 
                     AppButton(
                         buttonText: "Save",

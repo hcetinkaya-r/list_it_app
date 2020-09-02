@@ -27,10 +27,12 @@ class CustomBottomNavBar extends StatelessWidget {
         backgroundColor: Colors.white,
         activeColor: Theme.of(context).primaryColor,
         items: [
-          _createNavItem(TabItem.Users),
-
-          _createNavItem(TabItem.Profile),
           _createNavItem(TabItem.Assistant),
+          _createNavItem(TabItem.ListIt),
+          _createNavItem(TabItem.Profile),
+
+
+
 
 
         ],

@@ -52,11 +52,15 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Please authorize to use the app</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To access photo library</string>
 	<key>NSCameraUsageDescription</key>
 	<string>To access camera</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>To access microphone</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<string>N0</string>
 </dict>
 </plist>

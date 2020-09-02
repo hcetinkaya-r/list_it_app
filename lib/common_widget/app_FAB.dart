@@ -12,6 +12,7 @@ class AppFAB extends StatelessWidget {
   final double width;
   final double height;
   final VoidCallback onPressed;
+  final bool mini;
 
   const AppFAB(
       {Key key,
@@ -24,6 +25,7 @@ class AppFAB extends StatelessWidget {
         this.width,
         this.height,
         this.borderColor : Colors.black38,
+        this.mini : false,
       @required this.onPressed})
       : assert(onPressed != null), super(key: key);
 
@@ -40,6 +42,7 @@ class AppFAB extends StatelessWidget {
         onPressed: onPressed,
         tooltip: toolTip,
         heroTag: heroTag,
+        mini: mini,
         backgroundColor: backgroundColor,
         child: Icon(
           fabIcon,

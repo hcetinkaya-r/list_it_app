@@ -1,5 +1,5 @@
 import 'package:list_it_app/models/app_user.dart';
-import 'package:list_it_app/services/auth_base.dart';
+import 'package:list_it_app/services/firebase/auth_base.dart';
 
 class FakeAuthenticationService implements AuthBase {
   String userID = "123456";
