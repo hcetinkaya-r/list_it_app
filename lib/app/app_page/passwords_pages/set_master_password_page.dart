@@ -11,6 +11,7 @@ import 'package:local_auth/local_auth.dart';
 class SetMasterPasswordPage extends StatefulWidget {
   String title;
 
+
   SetMasterPasswordPage({this.title});
 
   @override
@@ -20,22 +21,16 @@ class SetMasterPasswordPage extends StatefulWidget {
 class _SetMasterPasswordPageState extends State<SetMasterPasswordPage> {
   TextEditingController masterPassController = TextEditingController();
 
-
-
-
-
-
   Future<Null> getMasterPass() async {
     final storage = new FlutterSecureStorage();
-    String masterPass = await storage.read(key: 'master') ?? '';
+    String masterPass = await storage.read(key: 'masterPass') ?? '';
     masterPassController.text = masterPass;
-
   }
 
   saveMasterPass(String masterPass) async {
     final storage = new FlutterSecureStorage();
 
-    await storage.write(key: 'master', value: masterPass);
+    await storage.write(key: 'masterPass', value: masterPass);
   }
 
   authenticate() async {
@@ -47,7 +42,7 @@ class _SetMasterPasswordPageState extends State<SetMasterPasswordPage> {
     if (!didAuthenticate) {
       Navigator.pop(context);
     }
-    //masterPassController.text = "";
+    masterPassController.text = "";
 
     print(didAuthenticate);
   }
@@ -72,7 +67,7 @@ class _SetMasterPasswordPageState extends State<SetMasterPasswordPage> {
         children: <Widget>[
           Container(
             margin: EdgeInsets.fromLTRB(30, 40, 30, 30),
-            padding: EdgeInsets.only(right: 10, left: 10),
+            padding: EdgeInsets.only(right: 30, left: 30),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               border: Border.all(
@@ -81,87 +76,70 @@ class _SetMasterPasswordPageState extends State<SetMasterPasswordPage> {
             ),
             width: double.infinity,
             height: MediaQuery.of(context).size.height / 2,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                 PageTitle(
-                   title: widget.title,
-                   textSize: 27,
-                 ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20, bottom: 40),
-                    child: Text(
-                      "Set 'Master Password' for your all passwords:",
-                      style: TextStyle(
-                          color: Color(0xFFA30003),
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  TextFormField(
-
-
-                    obscureText: false,
-                    maxLength: 32,
-                    decoration: InputDecoration(
-                        labelText: "Master Pass",
-                        labelStyle: TextStyle(fontFamily: "Subtitle"),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                    controller: masterPassController,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 90.0),
-                    child: AppButton(
-                        buttonText: "Set Master Password",
-
-                        textColor: Colors.white,
-                        buttonColor: Color(0xFFA30003),
-                        onPressed: () async {
-                          if (masterPassController.text.isNotEmpty) {
-                            saveMasterPass(masterPassController.text.trim());
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        PasswordsHomePage()));
-                          } else {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text(
-                                      "Error!",
-                                      style: TextStyle(fontFamily: "Title"),
-                                    ),
-                                    content: Text(
-                                      "Please enter valid Master Password.",
-                                      style: TextStyle(fontFamily: "Subtitle"),
-                                    ),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        child: Text(
-                                          "CLOSE",
-                                          style: TextStyle(
-                                              color: Color(0xFFA30003)),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      )
-                                    ],
-                                  );
-                                });
-                          }
-                        }),
-                  ),
-                ],
-              ),
+              children: <Widget>[
+                PageTitle(
+                  title: widget.title,
+                  textSize: 27,
+                ),
+                TextField(
+                  obscureText: true,
+                  maxLength: 32,
+                  decoration: InputDecoration(
+                      labelText: "Master Pass",
+                      labelStyle: TextStyle(fontFamily: "Subtitle"),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  controller: masterPassController,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 90.0),
+                  child: AppButton(
+                      buttonText: "Set Master Password",
+                      textColor: Colors.white,
+                      buttonColor: Color(0xFFA30003),
+                      onPressed: () async {
+                        if (masterPassController.text.isNotEmpty) {
+                          saveMasterPass(masterPassController.text.trim());
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      PasswordsHomePage()));
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text(
+                                    "Error!",
+                                    style: TextStyle(fontFamily: "Title"),
+                                  ),
+                                  content: Text(
+                                    "Please enter valid Master Password.",
+                                    style: TextStyle(fontFamily: "Subtitle"),
+                                  ),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text(
+                                        "CLOSE",
+                                        style:
+                                            TextStyle(color: Color(0xFFA30003)),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    )
+                                  ],
+                                );
+                              });
+                        }
+                      }),
+                ),
+              ],
             ),
           ),
           Positioned(

@@ -18,31 +18,35 @@ class AssistantPage extends StatefulWidget {
 }
 
 class _AssistantPageState extends State<AssistantPage> {
-  int launch = 0;
+  int launch=0;
+
 
 
   Future checkPasswordsFirstPage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    launch = prefs.getInt("launch") ?? 0;
+    var launch = prefs.getInt("masterPass") ?? 0;
 
     final storage = new FlutterSecureStorage();
     String masterPass = await storage.read(key: 'master') ?? '';
 
-
-      if (launch == 0 && masterPass == '') {
-        await prefs.setInt('launch', launch++);
-      }
-
-
-
+    if (launch == 0 && masterPass == '') {
+      await prefs.setInt('launch', launch+1);
+    }
   }
 
-
-  @override
+@override
   void initState() {
-    checkPasswordsFirstPage();
+
+    // TODO: implement initState
     super.initState();
+    checkPasswordsFirstPage();
+
   }
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -138,10 +142,21 @@ class _AssistantPageState extends State<AssistantPage> {
                           children: [
                             AppFAB(
                               onPressed: () {
-
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PasswordsHomePage()));
-                                },
-
+                             if(launch == 0) {
+                               Navigator.push(
+                                   context,
+                                   MaterialPageRoute(
+                                       builder: (BuildContext context) =>
+                                           SetMasterPasswordPage(
+                                               title: "Set Master Password")));
+                             }else{
+                               Navigator.push(
+                                   context,
+                                   MaterialPageRoute(
+                                       builder: (BuildContext context) =>
+                                         PasswordsHomePage()));
+                             }
+                              },
                               toolTip: "Password",
                               heroTag: "Password",
                               fabIcon: Icons.security,

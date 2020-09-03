@@ -42,9 +42,9 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
       } on FirebaseAuthException catch (e) {
         print("OTURUM AÇMA HATA: " + Errors.showError(e.code));
         SensitivePlatformAlertDialog(
-            title: "SİGN IN ERROR",
-            content: Errors.showError(e.code),
-            rightButtonText: "OK")
+                title: "SİGN IN ERROR",
+                content: Errors.showError(e.code),
+                rightButtonText: "OK")
             .show(context);
       }
     } else {
@@ -55,10 +55,11 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
           print("Olusturulan user id: " + _createdAppUser.userID.toString());
       } on FirebaseAuthException catch (e) {
         print("KULLANICI OLUŞTURMA HATA: " + Errors.showError(e.code));
-     SensitivePlatformAlertDialog(
+        SensitivePlatformAlertDialog(
                 title: "Create user error",
                 content: Errors.showError(e.code),
-                rightButtonText: "OK").show(context);
+                rightButtonText: "OK")
+            .show(context);
       }
     }
   }
@@ -101,97 +102,88 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
-        child: Stack(
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset(
-                  ("images/loginLogo.png"),
-                  width: 125,
-                  height: 140,
-                ),
+        child: Column(
+          children: [
+            Container(
+
+              child: Image.asset(
+                ("images/loginLogo.png"),
+                width: 125,
+                height: 140,
+              ),
+            ),
+            Stack(
+              children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(right: 30, left: 30),
+                  margin: EdgeInsets.only(top: 30, right: 30, left: 30),
                   height: MediaQuery.of(context).size.height / 1.4,
+                  width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     border: Border.all(color: Theme.of(context).primaryColor),
                   ),
                   child: Column(
+                    mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: <Widget>[
-                          Form(
-                            key: _formKey,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                SizedBox(height: 60),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                  child: TextFormField(
-                                      initialValue: "hakan@hakan.com",
-                                      keyboardType: TextInputType.emailAddress,
-                                      decoration: InputDecoration(
-                                        errorText:
-                                            _userModel.emailErrorMessage != null
-                                                ? _userModel.emailErrorMessage
-                                                : null,
-                                        prefixIcon: Icon(Icons.mail),
-                                        hintText: "e-mail",
-                                        labelText: "E-mail",
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                        ),
-                                      ),
-                                      onSaved: (String enteredEmail) {
-                                        _email = enteredEmail;
-                                      }),
-                                ),
-                                SizedBox(height: 10),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                  child: TextFormField(
-                                    initialValue: "123456",
-                                    obscureText: true,
-                                    decoration: InputDecoration(
-                                      errorText:
-                                          _userModel.passwordErrorMessage !=
-                                                  null
-                                              ? _userModel.passwordErrorMessage
-                                              : null,
-                                      prefixIcon: Icon(Icons.lock),
-                                      hintText: "Password",
-                                      labelText: "Password",
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                      ),
-                                    ),
-                                    onSaved: (String enteredPassword) {
-                                      _password = enteredPassword;
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
+                    children: <Widget>[
+                      Form(
+                        key: _formKey,
                         child: Column(
                           children: <Widget>[
-                            AppButton(
-                              buttonText: _buttonText,
-                              buttonTextSize: 24,
-                              onPressed: () => _formSubmit(),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(20, 50, 20, 0),
+                              child: TextFormField(
+                                  initialValue: "hakan@hakan.com",
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: InputDecoration(
+                                    errorText:
+                                        _userModel.emailErrorMessage != null
+                                            ? _userModel.emailErrorMessage
+                                            : null,
+                                    prefixIcon: Icon(Icons.mail),
+                                    hintText: "e-mail",
+                                    labelText: "E-mail",
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                  ),
+                                  onSaved: (String enteredEmail) {
+                                    _email = enteredEmail;
+                                  }),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                              child: TextFormField(
+                                initialValue: "123456",
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  errorText:
+                                      _userModel.passwordErrorMessage != null
+                                          ? _userModel.passwordErrorMessage
+                                          : null,
+                                  prefixIcon: Icon(Icons.lock),
+                                  hintText: "Password",
+                                  labelText: "Password",
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                ),
+                                onSaved: (String enteredPassword) {
+                                  _password = enteredPassword;
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
+                              child: AppButton(
+                                buttonText: _buttonText,
+                                buttonTextSize: 24,
+                                onPressed: () => _formSubmit(),
+                              ),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.min,
@@ -221,30 +213,22 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
                                 ),
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: AppButton(
-                                buttonColor: Colors.white,
-                                buttonText: "Sign in with Google",
-                                buttonTextSize: 16,
-                                textColor: Colors.black87,
-                                buttonIcon:
-                                    Image.asset("images/google-logo.png"),
-                                onPressed: () => _signInWithGoogle(context),
-                              ),
-                            ),
-
-                            /*SocialLoginButton(
-                                  buttonText: "Guest Login",
-                                  onPressed: () => _guestLogin(context),
-                                  buttonIcon: Icon(Icons.supervised_user_circle,
-                                      color: Colors.white),
-                                ),*/
                           ],
                         ),
                       ),
                       Column(
                         children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: AppButton(
+                              buttonColor: Colors.white,
+                              buttonText: "Sign in with Google",
+                              buttonTextSize: 16,
+                              textColor: Colors.black87,
+                              buttonIcon: Image.asset("images/google-logo.png"),
+                              onPressed: () => _signInWithGoogle(context),
+                            ),
+                          ),
                           Text(
                             _textChange,
                             style: TextStyle(
@@ -303,16 +287,15 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
                             ],
                           ),
                         ],
-                      ),
+                      )
                     ],
                   ),
                 ),
+                Positioned(
+                    width: MediaQuery.of(context).size.width,
+                    child: PageAvatar()),
               ],
             ),
-            Positioned(
-                top: MediaQuery.of(context).size.height / 6,
-                left: MediaQuery.of(context).size.width / 2.37,
-                child: PageAvatar()),
           ],
         ),
       ),

@@ -34,15 +34,15 @@ class ForgotPasswordPage extends StatelessWidget {
             children: [
               Container(
                 margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
-                padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
-                height: MediaQuery.of(context).size.height / 2,
+                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                height: MediaQuery.of(context).size.height / 2.3,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   border: Border.all(color: Theme.of(context).primaryColor),
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
                       "Forgot Password",
@@ -51,7 +51,11 @@ class ForgotPasswordPage extends StatelessWidget {
                         color: Colors.black54,
                       ),
                     ),
-                    Column(children: <Widget>[
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+
                       Text(
                         "Enter your address below and we'll send you a new secure link to reset your password:",
                         textAlign: TextAlign.left,
