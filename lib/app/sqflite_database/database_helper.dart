@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:list_it_app/models/notes/notes.dart';
 import 'package:list_it_app/models/notes/notes_category.dart';
 import 'package:list_it_app/models/passwords/password.dart';
+import 'package:list_it_app/models/reminders/reminders.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -125,7 +126,7 @@ class DatabaseHelper {
     return result;
   }
 
-  /*Future<List<Map<String, dynamic>>> getReminders() async {
+  Future<List<Map<String, dynamic>>> getReminders() async {
     var db = await _getDatabase();
     var result = db.query("Reminders order by reminderID Desc");
     return result;
@@ -157,7 +158,7 @@ class DatabaseHelper {
     var db = await _getDatabase();
     var result = db.delete("Reminders", where: 'reminderID = ?', whereArgs: [reminderID]);
     return result;
-  }*/
+  }
 
   Future<List<Map<String, dynamic>>> getPasswords() async {
     var db = await _getDatabase();

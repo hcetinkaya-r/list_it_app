@@ -4,12 +4,14 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:list_it_app/app/app_page/budget_pages/budget_home_page.dart';
+import 'package:list_it_app/app/app_page/notes/notes_home_page.dart';
 import 'package:list_it_app/app/app_page/passwords_pages/passwords_home_page.dart';
 import 'package:list_it_app/app/app_page/passwords_pages/set_master_password_page.dart';
+import 'package:list_it_app/app/app_page/reminders_pages/reminders_home_page.dart';
 import 'package:list_it_app/common_widget/app_FAB.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
 import 'package:list_it_app/common_widget/page_title.dart';
-import 'package:list_it_app/app/app_page/notes/notes_page.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AssistantPage extends StatefulWidget {
@@ -85,7 +87,7 @@ class _AssistantPageState extends State<AssistantPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => NotesPage(),
+                                    builder: (context) => NotesHomePage(),
                                   ),
                                 );
                               },
@@ -176,7 +178,14 @@ class _AssistantPageState extends State<AssistantPage> {
                         Column(
                           children: [
                             AppFAB(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            RemindersHomePage()));
+
+                              },
                               toolTip: "Reminder",
                               heroTag: "Reminder",
                               fabIcon: Icons.timer,

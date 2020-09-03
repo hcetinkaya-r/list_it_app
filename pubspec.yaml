@@ -43,6 +43,8 @@ dependencies:
   password_strength: ^0.1.2
   encrypt: ^4.0.2
   path_provider: ^1.6.11
+  flutter_local_notifications: ^1.4.4+2
+  date_format: ^1.0.8
 
 
 

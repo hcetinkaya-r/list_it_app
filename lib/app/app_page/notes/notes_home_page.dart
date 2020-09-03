@@ -12,12 +12,12 @@ import 'package:list_it_app/models/notes/notes.dart';
 import 'package:list_it_app/models/notes/notes_category.dart';
 import 'add_note_page.dart';
 
-class NotesPage extends StatefulWidget {
+class NotesHomePage extends StatefulWidget {
   @override
-  _NotesPageState createState() => _NotesPageState();
+  _NotesHomePageState createState() => _NotesHomePageState();
 }
 
-class _NotesPageState extends State<NotesPage> {
+class _NotesHomePageState extends State<NotesHomePage> {
   DatabaseHelper databaseHelper;
   List<Notes> allNotes;
   var _scaffoldKey = GlobalKey<ScaffoldState>();
