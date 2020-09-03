@@ -234,7 +234,7 @@ class _NotesHomePageState extends State<NotesHomePage> {
                           AppFAB(
                             toolTip: "Add Note",
                             heroTag: "Note",
-                            fabIcon: Icons.add_circle_outlined,
+                            fabIcon: Icons.add_circle_outline,
                             borderColor: Colors.black54,
                             onPressed: () async {
                               var result = await _goAddNoteScreen(context);
@@ -244,22 +244,7 @@ class _NotesHomePageState extends State<NotesHomePage> {
                             },
                           ),
 
-                          /*FloatingActionButton(
-                            onPressed: () async {
-                              var result = await _goAddNoteScreen(context);
-                              if (result != null) {
-                                setState(() {});
-                              }
-                            },
-                            tooltip: "Add Note",
-                            heroTag: "Not ekle",
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              Icons.add_circle_outline,
-                              color: Colors.black54,
-                              size: 40,
-                            ),
-                          ),*/
+
                           SizedBox(height: 10),
                           Text(
                             "Add Note",

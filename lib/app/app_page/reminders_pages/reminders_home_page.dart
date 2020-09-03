@@ -80,13 +80,14 @@ class _RemindersHomePageState extends State<RemindersHomePage> {
         iconTheme: IconThemeData(color: Color(0xFFA30003)),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Stack(
             children: <Widget>[
               Container(
                 margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
                 padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
-                height: MediaQuery.of(context).size.height / 2,
+                height: MediaQuery.of(context).size.height / 1.4,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -218,6 +219,36 @@ class _RemindersHomePageState extends State<RemindersHomePage> {
                             }
                           }),
                     ),
+                    AppFAB(
+                        onPressed: () async {
+                          DateTime now = DateTime.now().add(
+                            Duration(seconds: 5),
+                          );
+                          await singleNotification(now, "Notification",
+                              "This is Notification", 123456);
+                        },
+                        fabIcon: Icons.notifications,
+                        toolTip: "Add Notification",
+                        heroTag: "Notification"),
+                    SizedBox(height: 10),
+                    AppFAB(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddReminderPage(),
+                          ),
+                        );
+                      },
+                      fabIcon: Icons.add_circle_outline,
+                      toolTip: "Add reminder",
+                      heroTag: "Reminder",
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Add Reminder",
+                      style: TextStyle(color: Colors.black54),
+                    ),
                   ],
                 ),
               ),
@@ -229,28 +260,6 @@ class _RemindersHomePageState extends State<RemindersHomePage> {
                 ),
               ),
             ],
-          ),
-          AppFAB(
-              onPressed: () async {
-                DateTime now = DateTime.now().add(
-                  Duration(seconds: 5),
-                );
-                await singleNotification(
-                    now, "Notification", "This is Notification", 123456);
-              },
-              toolTip: "Add Notification",
-              heroTag: "Notification"),
-          AppFAB(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddReminderPage(),
-                ),
-              );
-            },
-            toolTip: "Add reminder",
-            heroTag: "Reminder",
           ),
         ],
       ),

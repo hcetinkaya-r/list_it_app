@@ -7,6 +7,7 @@ import 'package:list_it_app/app/app_page/assistant_page.dart';
 import 'package:list_it_app/app/app_page/notes/notes_home_page.dart';
 import 'package:list_it_app/app/sqflite_database/database_helper.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
+import 'package:list_it_app/common_widget/page_title.dart';
 import 'package:list_it_app/models/notes/notes.dart';
 import 'package:list_it_app/models/notes/notes_category.dart';
 
@@ -97,12 +98,8 @@ class _AddNotePageState extends State<AddNotePage> {
           child: Column(children: [
             Padding(
               padding: const EdgeInsets.only(top: 40.0),
-              child: Text(
-                widget.title,
-                style: TextStyle(
-                  color: Colors.black54,
-                  fontSize: 30,
-                ),
+              child: PageTitle(
+                title: widget.title,
               ),
             ),
             SizedBox(height: 20),

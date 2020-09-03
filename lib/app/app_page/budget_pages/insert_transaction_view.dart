@@ -9,11 +9,11 @@ import 'package:list_it_app/services/budget/budget_base_page.dart';
 import 'package:list_it_app/view_models/budget/insert_transaction_model.dart';
 import 'package:list_it_app/view_models/budget/ui_helper/ui_helpers.dart';
 
-class InsertTranscationView extends StatelessWidget {
+class InsertTransactionView extends StatelessWidget {
   final BudgetCategory category;
   final int selectedCategory;
 
-  InsertTranscationView(this.category, this.selectedCategory);
+  InsertTransactionView(this.category, this.selectedCategory);
 
   @override
   Widget build(BuildContext context) {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:list_it_app/common_widget/app_button.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
+import 'package:list_it_app/common_widget/page_title.dart';
 import 'package:list_it_app/common_widget/sensitive_platform_alert_dialog.dart';
 import 'package:list_it_app/view_models/user_model.dart';
 import 'package:provider/provider.dart';
@@ -106,12 +107,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: <Widget>[
                     Column(
                       children: <Widget>[
-                        Text(
-                          "User Profile",
-                          style: TextStyle(
-                            fontSize: 36,
-                            color: Colors.black54,
-                          ),
+                        PageTitle(
+                          title: "Profile",
                         ),
                         SizedBox(height:20),
                         GestureDetector(

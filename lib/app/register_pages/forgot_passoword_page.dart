@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:list_it_app/common_widget/app_button.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
+import 'package:list_it_app/common_widget/page_title.dart';
 import 'package:list_it_app/view_models/user_model.dart';
 import 'package:provider/provider.dart';
 
@@ -44,12 +45,8 @@ class ForgotPasswordPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
-                      "Forgot Password",
-                      style: TextStyle(
-                        fontSize: 36,
-                        color: Colors.black54,
-                      ),
+                    PageTitle(
+                      title: "Forgot Password",
                     ),
                     Column(
                       mainAxisSize: MainAxisSize.max,

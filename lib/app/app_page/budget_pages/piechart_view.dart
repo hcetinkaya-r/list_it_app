@@ -2,6 +2,7 @@ import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
+import 'package:list_it_app/common_widget/page_title.dart';
 import 'package:list_it_app/services/budget/budget_base_page.dart';
 import 'package:list_it_app/services/budget/enums/budget_page_state.dart';
 import 'package:list_it_app/view_models/budget/piechart_model.dart';
@@ -39,10 +40,8 @@ class PieChartView extends StatelessWidget {
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           SizedBox(height: 40),
-                          Text(
-                            'Chart',
-                            style:
-                                TextStyle(color: Colors.black54, fontSize: 30),
+                          PageTitle(
+                            title: "Budget Chart",
                           ),
                           ChipsChoice<int>.single(
                             itemConfig: ChipsChoiceItemConfig(

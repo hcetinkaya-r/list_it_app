@@ -11,7 +11,6 @@ import 'package:local_auth/local_auth.dart';
 class SetMasterPasswordPage extends StatefulWidget {
   String title;
 
-
   SetMasterPasswordPage({this.title});
 
   @override
@@ -79,7 +78,6 @@ class _SetMasterPasswordPageState extends State<SetMasterPasswordPage> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
               children: <Widget>[
                 PageTitle(
                   title: widget.title,
@@ -89,9 +87,17 @@ class _SetMasterPasswordPageState extends State<SetMasterPasswordPage> {
                   obscureText: true,
                   maxLength: 32,
                   decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFA30003),
+                        ),
+                      ),
+
                       labelText: "Master Pass",
-                      labelStyle: TextStyle(fontFamily: "Subtitle"),
+                      labelStyle: TextStyle(color: Color(0xFFA30003), fontFamily: "Subtitle"),
+
                       border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFFA30003),),
                           borderRadius: BorderRadius.circular(10))),
                   controller: masterPassController,
                 ),
@@ -99,6 +105,7 @@ class _SetMasterPasswordPageState extends State<SetMasterPasswordPage> {
                   padding: const EdgeInsets.only(top: 90.0),
                   child: AppButton(
                       buttonText: "Set Master Password",
+                      buttonTextSize: 20,
                       textColor: Colors.white,
                       buttonColor: Color(0xFFA30003),
                       onPressed: () async {

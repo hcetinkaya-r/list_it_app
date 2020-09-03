@@ -10,7 +10,7 @@ class PageTitle extends StatelessWidget {
   const PageTitle({
     Key key,
     @required this.title,
-    this.textSize: 36,
+    this.textSize: 30,
     this.textColor: Colors.black54,
   })  : assert(title != null),
         super(key: key);

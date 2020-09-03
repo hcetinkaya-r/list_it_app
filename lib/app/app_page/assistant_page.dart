@@ -20,9 +20,7 @@ class AssistantPage extends StatefulWidget {
 }
 
 class _AssistantPageState extends State<AssistantPage> {
-  int launch=0;
-
-
+  int launch = 0;
 
   Future checkPasswordsFirstPage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -32,23 +30,16 @@ class _AssistantPageState extends State<AssistantPage> {
     String masterPass = await storage.read(key: 'master') ?? '';
 
     if (launch == 0 && masterPass == '') {
-      await prefs.setInt('launch', launch+1);
+      await prefs.setInt('launch', launch + 1);
     }
   }
 
-@override
+  @override
   void initState() {
-
     // TODO: implement initState
     super.initState();
     checkPasswordsFirstPage();
-
   }
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -144,20 +135,21 @@ class _AssistantPageState extends State<AssistantPage> {
                           children: [
                             AppFAB(
                               onPressed: () {
-                             if(launch == 0) {
-                               Navigator.push(
-                                   context,
-                                   MaterialPageRoute(
-                                       builder: (BuildContext context) =>
-                                           SetMasterPasswordPage(
-                                               title: "Set Master Password")));
-                             }else{
-                               Navigator.push(
-                                   context,
-                                   MaterialPageRoute(
-                                       builder: (BuildContext context) =>
-                                         PasswordsHomePage()));
-                             }
+                                if (launch == 0) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              SetMasterPasswordPage(
+                                                  title:
+                                                      "Set Master Password")));
+                                } else {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              PasswordsHomePage()));
+                                }
                               },
                               toolTip: "Password",
                               heroTag: "Password",
@@ -184,7 +176,6 @@ class _AssistantPageState extends State<AssistantPage> {
                                     MaterialPageRoute(
                                         builder: (BuildContext context) =>
                                             RemindersHomePage()));
-
                               },
                               toolTip: "Reminder",
                               heroTag: "Reminder",

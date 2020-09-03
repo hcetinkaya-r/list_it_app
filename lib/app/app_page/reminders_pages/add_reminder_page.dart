@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:list_it_app/app/app_page/reminders_pages/reminders_home_page.dart';
 import 'package:list_it_app/app/sqflite_database/database_helper.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
+import 'package:list_it_app/common_widget/page_title.dart';
 import 'package:list_it_app/models/reminders/reminders.dart';
 
 class AddReminderPage extends StatefulWidget {
@@ -48,19 +49,27 @@ class _AddReminderPageState extends State<AddReminderPage> {
         iconTheme: IconThemeData(color: Color(0xFFA30003)),
       ),
       body: Column(
+
         children: <Widget>[
           Stack(
             children: <Widget>[
               Container(
                 margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
                 padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
-                height: MediaQuery.of(context).size.height / 2,
+                height: MediaQuery.of(context).size.height/1.4,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   border: Border.all(color: Color(0xFFA30003)),
                 ),
-                child: Column(children: <Widget>[
+                child: Column(
+
+
+                  children: <Widget>[
+                    PageTitle(
+                      title: "Add Reminder",
+
+                    ),
                   Form(
                     key: formKey,
                     child: Column(
