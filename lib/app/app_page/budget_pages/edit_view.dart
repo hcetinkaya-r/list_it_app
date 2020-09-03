@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:list_it_app/app/sqflite_database/moor_database/moor_database.dart';
+import 'package:list_it_app/app/sqflite_database/moor_database.dart';
 import 'package:list_it_app/common_widget/app_button.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
 import 'package:list_it_app/services/budget/budget_base_page.dart';

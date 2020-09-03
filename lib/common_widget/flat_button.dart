@@ -15,7 +15,7 @@ class AppFlatButton extends StatelessWidget {
     Key key,
     this.buttonTextColor,
     this.buttonColor,
-    this.buttonText,
+    @required this.buttonText,
     this.buttonTextSize,
     this.buttonTextWeight,
     @required this.onPressed,

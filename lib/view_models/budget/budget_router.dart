@@ -6,7 +6,7 @@ import 'package:list_it_app/app/app_page/budget_pages/edit_view.dart';
 import 'package:list_it_app/app/app_page/budget_pages/insert_transaction_view.dart';
 import 'package:list_it_app/app/app_page/budget_pages/new_transaction_view.dart';
 import 'package:list_it_app/app/app_page/budget_pages/piechart_view.dart';
-import 'package:list_it_app/app/sqflite_database/moor_database/moor_database.dart';
+import 'package:list_it_app/app/sqflite_database/moor_database.dart';
 
 class BudgetRouters {
   static Route<dynamic> generateRoute(RouteSettings settings) {

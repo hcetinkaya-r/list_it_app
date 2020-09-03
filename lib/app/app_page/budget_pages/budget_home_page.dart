@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:list_it_app/app/app_page/budget_pages/chart_dialog_page.dart';
-import 'package:list_it_app/app/sqflite_database/moor_database/moor_database.dart';
+import 'package:list_it_app/app/sqflite_database/moor_database.dart';
 import 'package:list_it_app/common_widget/app_button.dart';
 import 'package:list_it_app/common_widget/budget/home_view_widgets/app_bar_title_widget.dart';
 import 'package:list_it_app/common_widget/budget/home_view_widgets/budget_fab_widget.dart';
@@ -96,10 +96,10 @@ class BudgetHomePage extends StatelessWidget {
                               buildList(model.transactions, model),
                             ],
                           ),
-                          model.isCollabsed
+                          model.isCollapsed
                               ? PickMonthOverlay(
                                   model: model,
-                                  showOrHide: model.isCollabsed,
+                                  showOrHide: model.isCollapsed,
                                   context: context)
                               : Container(),
                         ],

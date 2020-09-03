@@ -21,6 +21,7 @@ class PageTitle extends StatelessWidget {
       title,
       textAlign: TextAlign.center,
       style: TextStyle(
+
         fontSize: textSize,
         color: textColor,
       ),

@@ -34,5 +34,9 @@ class CategoryIconService {
     BudgetCategory(4, "Investment", FontAwesomeIcons.piggyBank, Colors.cyanAccent),
     BudgetCategory(5, "Lottery", FontAwesomeIcons.dice, Colors.deepOrange),
     BudgetCategory(6, "Business", FontAwesomeIcons.businessTime, Colors.grey),
+    BudgetCategory(7, "Commission", FontAwesomeIcons.moneyCheckAlt, Colors.orange),
+
+
+
   };
 }

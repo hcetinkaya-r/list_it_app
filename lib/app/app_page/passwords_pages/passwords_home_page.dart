@@ -62,7 +62,7 @@ class _PasswordsHomePageState extends State<PasswordsHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => SetMasterPasswordPage()));}
+                      builder: (context) => SetMasterPasswordPage(title: "Update Master Password")));}
             ),
           ],
         ),

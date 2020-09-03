@@ -4,9 +4,15 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:list_it_app/app/app_page/passwords_pages/passwords_home_page.dart';
 import 'package:list_it_app/common_widget/app_button.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
+import 'package:list_it_app/common_widget/page_title.dart';
 import 'package:local_auth/local_auth.dart';
 
+// ignore: must_be_immutable
 class SetMasterPasswordPage extends StatefulWidget {
+  String title;
+
+  SetMasterPasswordPage({this.title});
+
   @override
   _SetMasterPasswordPageState createState() => _SetMasterPasswordPageState();
 }
@@ -14,10 +20,16 @@ class SetMasterPasswordPage extends StatefulWidget {
 class _SetMasterPasswordPageState extends State<SetMasterPasswordPage> {
   TextEditingController masterPassController = TextEditingController();
 
+
+
+
+
+
   Future<Null> getMasterPass() async {
     final storage = new FlutterSecureStorage();
     String masterPass = await storage.read(key: 'master') ?? '';
     masterPassController.text = masterPass;
+
   }
 
   saveMasterPass(String masterPass) async {
@@ -35,7 +47,7 @@ class _SetMasterPasswordPageState extends State<SetMasterPasswordPage> {
     if (!didAuthenticate) {
       Navigator.pop(context);
     }
-    masterPassController.text = "";
+    //masterPassController.text = "";
 
     print(didAuthenticate);
   }
@@ -75,16 +87,12 @@ class _SetMasterPasswordPageState extends State<SetMasterPasswordPage> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40, bottom: 20),
-                    child: Text(
-                      "Set Master Password",
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
+                 PageTitle(
+                   title: widget.title,
+                   textSize: 27,
+                 ),
+
+
                   Padding(
                     padding: const EdgeInsets.only(top: 20, bottom: 40),
                     child: Text(
@@ -95,7 +103,9 @@ class _SetMasterPasswordPageState extends State<SetMasterPasswordPage> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  TextField(
+                  TextFormField(
+
+
                     obscureText: false,
                     maxLength: 32,
                     decoration: InputDecoration(
@@ -109,6 +119,7 @@ class _SetMasterPasswordPageState extends State<SetMasterPasswordPage> {
                     padding: const EdgeInsets.only(top: 90.0),
                     child: AppButton(
                         buttonText: "Set Master Password",
+
                         textColor: Colors.white,
                         buttonColor: Color(0xFFA30003),
                         onPressed: () async {

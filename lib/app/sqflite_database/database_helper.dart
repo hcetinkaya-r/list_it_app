@@ -7,12 +7,12 @@ import 'package:list_it_app/models/passwords/password.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-
-
 class DatabaseHelper {
   static DatabaseHelper _databaseHelper;
   static Database _database;
+
   DatabaseHelper._();
+
   static final DatabaseHelper db = DatabaseHelper._();
 
   factory DatabaseHelper() {
@@ -165,7 +165,6 @@ class DatabaseHelper {
     return result;
   }
 
-
   Future<List<Passwords>> getPasswordList() async {
     var mapListWithPasswords = await getPasswords();
     var passwordList = List<Passwords>();
@@ -190,7 +189,8 @@ class DatabaseHelper {
 
   Future<int> deletePassword(passwordID) async {
     var db = await _getDatabase();
-    var result = db.delete("Passwords", where: 'passwordID = ?', whereArgs: [passwordID]);
+    var result = db
+        .delete("Passwords", where: 'passwordID = ?', whereArgs: [passwordID]);
     return result;
   }
 
@@ -199,13 +199,6 @@ class DatabaseHelper {
     var result = db.delete("Passwords");
     return result;
   }
-
-
-
-
-
-
-
 
   //quotation from Stackoverflow(Raoul Scalise)
 
@@ -285,7 +278,7 @@ class DatabaseHelper {
     return "";
   }
 
-  /*Future<List<Map<String, dynamic>>> getTags() async {
+/*Future<List<Map<String, dynamic>>> getTags() async {
     var db = await _getDatabase();
     var result = db.query("Tags", orderBy: 'tagID DESC');
     return result;
@@ -311,7 +304,5 @@ class DatabaseHelper {
     var result = db.delete("Tags", where: 'tagID = ?', whereArgs: [tagID]);
     return result;
   }*/
-
-
 
 }

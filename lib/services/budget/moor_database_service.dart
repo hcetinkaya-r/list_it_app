@@ -1,6 +1,6 @@
 
 
-import 'package:list_it_app/app/sqflite_database/moor_database/moor_database.dart';
+import 'package:list_it_app/app/sqflite_database/moor_database.dart';
 
 class MoorDatabaseService {
   final AppDatabase _database = AppDatabase();

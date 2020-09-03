@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:list_it_app/app/sqflite_database/moor_database/moor_database.dart';
+import 'package:list_it_app/app/sqflite_database/moor_database.dart';
 import 'package:list_it_app/locator.dart';
 import 'package:list_it_app/services/budget/budget_base_model.dart';
 import 'package:list_it_app/services/budget/category_icon_service.dart';

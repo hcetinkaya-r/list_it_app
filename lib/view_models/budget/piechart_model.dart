@@ -1,4 +1,4 @@
-import 'package:list_it_app/app/sqflite_database/moor_database/moor_database.dart';
+import 'package:list_it_app/app/sqflite_database/moor_database.dart';
 import 'package:list_it_app/locator.dart';
 import 'package:list_it_app/services/budget/budget_base_model.dart';
 import 'package:list_it_app/services/budget/category_icon_service.dart';
@@ -107,6 +107,7 @@ class PieChartModel extends BudgetBaseModel {
       'Investment': 0,
       'Lottery': 0,
       'Business': 0,
+      'Commission': 0,
     };
 
     List<String> transactionsCategories = List();

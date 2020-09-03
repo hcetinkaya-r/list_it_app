@@ -25,7 +25,7 @@ class AppBarTitle extends StatelessWidget {
               title,
               style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w500, fontSize: 20),
             ),
-            model.isCollabsed
+            model.isCollapsed
                 ? Icon(
                     Icons.arrow_drop_down,
               //color: Colors.black54,

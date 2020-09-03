@@ -9,7 +9,7 @@ import 'package:list_it_app/app/app_page/passwords_pages/set_master_password_pag
 import 'package:list_it_app/common_widget/app_FAB.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
 import 'package:list_it_app/common_widget/page_title.dart';
-import 'package:list_it_app/view_models/notes/notes_page.dart';
+import 'package:list_it_app/app/app_page/notes/notes_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AssistantPage extends StatefulWidget {
@@ -19,7 +19,7 @@ class AssistantPage extends StatefulWidget {
 
 class _AssistantPageState extends State<AssistantPage> {
   int launch = 0;
-  bool loading = true;
+
 
   Future checkPasswordsFirstPage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -28,14 +28,15 @@ class _AssistantPageState extends State<AssistantPage> {
     final storage = new FlutterSecureStorage();
     String masterPass = await storage.read(key: 'master') ?? '';
 
-    setState(() {
-      if (launch == 0 && masterPass != null) {
-        prefs.setInt('launch', launch + 1);
+
+      if (launch == 0 && masterPass == '') {
+        await prefs.setInt('launch', launch++);
       }
-    });
+
 
 
   }
+
 
   @override
   void initState() {
@@ -137,13 +138,10 @@ class _AssistantPageState extends State<AssistantPage> {
                           children: [
                             AppFAB(
                               onPressed: () {
-                                if(launch == 0){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SetMasterPasswordPage()));
 
-                                }else{
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>PasswordsHomePage()));
-                                }
-                              },
+                                },
+
                               toolTip: "Password",
                               heroTag: "Password",
                               fabIcon: Icons.security,

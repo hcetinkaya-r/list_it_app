@@ -23,8 +23,6 @@ void setupLocator(){
   locator.registerLazySingleton(() => FireStoreDBService());
   locator.registerLazySingleton(() => FirebaseStorageService());
 
-
-
   //BUDGET SERVICES
   locator.registerLazySingleton(() => CategoryIconService());
   locator.registerLazySingleton(() => MoorDatabaseService());

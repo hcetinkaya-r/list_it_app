@@ -31,7 +31,7 @@ class _AddNotePageState extends State<AddNotePage> {
   List<Notes> allNotes;
   DatabaseHelper databaseHelper;
   NotesCategory selectedCategory;
-  int selectedCategoryID;
+  int categoryID;
   int selectedPriority;
   String noteTitle, noteContent;
   int selectedMenuItem = 1;
@@ -56,16 +56,13 @@ class _AddNotePageState extends State<AddNotePage> {
         allCategories.add(NotesCategory.fromMap(readMap));
       }
       if (widget.editNote != null) {
-        selectedCategoryID = widget.editNote.categoryID;
+        categoryID = widget.editNote.categoryID;
         selectedPriority = widget.editNote.notePriority;
       }
-      /*else {
-        categoryID = 1;
-        selectedPriority = 0;
-        selectedCategory = allCategories[0];
-      }*/
 
-      setState(() {});
+      setState(() {
+
+      });
     });
   }
 
@@ -145,7 +142,7 @@ class _AddNotePageState extends State<AddNotePage> {
                                           setState(() {
                                             selectedCategory =
                                                 userSelectedCategory;
-                                            selectedCategoryID =
+                                            categoryID =
                                                 userSelectedCategory.categoryID;
                                           });
                                         }),
@@ -251,7 +248,7 @@ class _AddNotePageState extends State<AddNotePage> {
                                   if (widget.editNote == null) {
                                     databaseHelper
                                         .addNote(Notes(
-                                            selectedCategoryID,
+                                            categoryID,
                                             noteTitle,
                                             noteContent,
                                             moment.toString(),
@@ -268,7 +265,7 @@ class _AddNotePageState extends State<AddNotePage> {
                                     databaseHelper
                                         .updateNote(Notes.withID(
                                             widget.editNote.noteID,
-                                            selectedCategoryID,
+                                            categoryID,
                                             noteTitle,
                                             noteContent,
                                             moment.toString(),

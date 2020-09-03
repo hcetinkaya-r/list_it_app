@@ -9,7 +9,7 @@ class NewTransactionModel extends BudgetBaseModel {
   final CategoryIconService _categoryIconService =
       locator<CategoryIconService>();
 
-  int selectedCategory = 2; // 1 = income, 2 = expense
+  int selectedCategory = 2;
 
   void changeSelectedItem(int newItemIndex) {
     selectedCategory = newItemIndex;

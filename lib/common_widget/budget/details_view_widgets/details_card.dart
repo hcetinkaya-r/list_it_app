@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:list_it_app/app/sqflite_database/moor_database/moor_database.dart';
+import 'package:list_it_app/app/sqflite_database/moor_database.dart';
 import 'package:list_it_app/common_widget/budget/details_view_widgets/details_table.dart';
 import 'package:list_it_app/view_models/budget/details_model.dart';
 import 'package:list_it_app/view_models/budget/ui_helper/ui_helpers.dart';

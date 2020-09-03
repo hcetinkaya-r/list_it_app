@@ -25,6 +25,7 @@ class _AddPasswordPageState extends State<AddPasswordPage> {
   TextEditingController _registrationNameController = TextEditingController();
   TextEditingController _userNameController = TextEditingController();
 
+
   var localAuth = LocalAuthentication();
 
   encrypt.Encrypted encrypted;
@@ -101,12 +102,16 @@ class _AddPasswordPageState extends State<AddPasswordPage> {
             height: MediaQuery.of(context).size.height,
             child: Column(
               mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  "Add Password",
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 30,
+                Padding(
+                  padding: const EdgeInsets.only(top:30.0),
+                  child: Text(
+                    "Add Password",
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 30,
+                    ),
                   ),
                 ),
                 Column(
@@ -231,30 +236,7 @@ class _AddPasswordPageState extends State<AddPasswordPage> {
                                           (Route<dynamic> route) => false);
                                     }
                                   }),
-                              /*RedLargeButton(
-                                buttonText: "Add Password",
-                                buttonTextColor: Colors.white,
-                                buttonFontSize: 20,
-                                buttonColor: Color(0xFFA30003),
-                                buttonRadius: 16,
-                                buttonOnPressed: () {
-                                  if (_formKey.currentState.validate()) {
-                                    encryptPass(_passwordController.text);
-                                    Passwords password = Passwords(
-                                        registrationName:
-                                            _registrationNameController.text,
-                                        password: encryptedString,
-                                        userName: _userNameController.text);
-                                    DatabaseHelper.db.addPassword(password);
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                PasswordsHomePage()),
-                                        (Route<dynamic> route) => false);
-                                  }
-                                },
-                              ),*/
+
                             ],
                           ),
                         ],

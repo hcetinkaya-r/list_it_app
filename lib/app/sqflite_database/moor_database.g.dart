@@ -152,7 +152,7 @@ class Transaction extends DataClass implements Insertable<Transaction> {
                       $mrjc(amount.hashCode, categoryindex.hashCode)))))));
 
   @override
-  bool operator ==(dynamic other) =>
+  bool operator == (dynamic other) =>
       identical(this, other) ||
       (other is Transaction &&
           other.type == this.type &&
@@ -331,7 +331,6 @@ class $TransactionsTable extends Transactions
   final VerificationMeta _memoMeta = const VerificationMeta('memo');
   GeneratedTextColumn _memo;
 
-
   GeneratedTextColumn get memo => _memo ??= _constructMemo();
 
   GeneratedTextColumn _constructMemo() {
@@ -476,8 +475,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [transactions];
 }
-
-
 
 mixin _$TransactionDaoMixin on DatabaseAccessor<AppDatabase> {
   $TransactionsTable get transactions => attachedDatabase.transactions;

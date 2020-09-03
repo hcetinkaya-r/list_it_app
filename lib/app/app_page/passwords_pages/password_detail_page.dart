@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:list_it_app/app/app_page/passwords_pages/update_password_page.dart';
+
 import 'package:list_it_app/common_widget/page_avatar.dart';
 import 'package:list_it_app/models/passwords/password.dart';
 import 'package:local_auth/local_auth.dart';
@@ -88,47 +88,27 @@ class _PasswordDetailPageState extends State<PasswordDetailPage> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    InkWell(
-                      onTap: () {
-                        if (decrypt == true) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => UpdatePasswordPage()),
-                          );
-                        } else {
-                          final snackBar = SnackBar(
-                            content: Text(
-                              'Please enter your master password first',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontFamily: "Subtitle"),
+                    Card(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ListTile(
+                            leading: Icon(
+                              Icons.supervised_user_circle,
+                              color: Color(0xFFA30003),
+                              size: 40,
                             ),
-                          );
-                          scaffoldKey.currentState.showSnackBar(snackBar);
-                        }
-                      },
-                      child: Card(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            ListTile(
-                              leading: Icon(
-                                Icons.supervised_user_circle,
-                                color: Color(0xFFA30003),
-                                size: 40,
-                              ),
-                              title: Text("User Name"),
-                              subtitle: Text(password.userName),
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.security,
-                                  color: Color(0xFFA30003), size: 40),
-                              title: Text("Password"),
-                              subtitle:
-                                  Text(decrypt ? decrypted : password.password),
-                            ),
-                          ],
-                        ),
+                            title: Text("User Name"),
+                            subtitle: Text(password.userName),
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.security,
+                                color: Color(0xFFA30003), size: 40),
+                            title: Text("Password"),
+                            subtitle:
+                                Text(decrypt ? decrypted : password.password),
+                          ),
+                        ],
                       ),
                     ),
                     Text("** Enter your master pass to view your password", style: TextStyle(color: Color(0xFFA30003)),)

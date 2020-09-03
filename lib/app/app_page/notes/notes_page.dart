@@ -1,16 +1,16 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:list_it_app/app/app_page/notes/category_list_dialog.dart';
 import 'package:list_it_app/app/sqflite_database/database_helper.dart';
 import 'package:list_it_app/common_widget/app_FAB.dart';
-
+import 'package:list_it_app/common_widget/flat_button.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
+import 'package:list_it_app/common_widget/page_title.dart';
 import 'package:list_it_app/models/notes/notes.dart';
 import 'package:list_it_app/models/notes/notes_category.dart';
 import 'add_note_page.dart';
-import 'category_list_dialog.dart';
 
 class NotesPage extends StatefulWidget {
   @override
@@ -87,12 +87,8 @@ class _NotesPageState extends State<NotesPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
-                    "Notes",
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 30,
-                    ),
+                  PageTitle(
+                    title: "Notes",
                   ),
                   SizedBox(height: 20),
                   Expanded(
@@ -145,17 +141,17 @@ class _NotesPageState extends State<NotesPage> {
                                         ButtonBar(
                                           alignment: MainAxisAlignment.center,
                                           children: <Widget>[
-                                            FlatButton(
+                                            AppFlatButton(
+                                                buttonText: "Update",
+                                                buttonTextColor: Colors.green,
                                                 onPressed: () {
                                                   _goAddNoteScreenForUpdate(
                                                       context, allNotes[index]);
-                                                },
-                                                child: Text(
-                                                  "Update",
-                                                  style: TextStyle(
-                                                      color: Colors.teal),
-                                                )),
-                                            FlatButton(
+                                                }),
+                                            AppFlatButton(
+                                              buttonText: "Delete",
+                                              buttonTextColor: Theme.of(context)
+                                                  .primaryColor,
                                               onPressed: () {
                                                 showDialog(
                                                     context: context,
@@ -170,19 +166,15 @@ class _NotesPageState extends State<NotesPage> {
                                                         children: <Widget>[
                                                           ButtonBar(
                                                             children: <Widget>[
-                                                              FlatButton(
+                                                              AppFlatButton(
                                                                 onPressed: () {
                                                                   Navigator.pop(
                                                                       context);
                                                                 },
-                                                                child: Text(
-                                                                  "Cancel",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .teal),
-                                                                ),
+                                                               buttonText: "Cancel",
+
                                                               ),
-                                                              FlatButton(
+                                                              AppFlatButton(
                                                                 onPressed: () {
                                                                   _deleteNote(allNotes[
                                                                           index]
@@ -190,12 +182,8 @@ class _NotesPageState extends State<NotesPage> {
                                                                   Navigator.pop(
                                                                       context);
                                                                 },
-                                                                child: Text(
-                                                                  "Delete ",
-                                                                  style: TextStyle(
-                                                                      color: Color(
-                                                                          0xFFA30003)),
-                                                                ),
+                                                                buttonText: "Delete",
+                                                                buttonTextColor: Theme.of(context).primaryColor,
                                                               ),
                                                             ],
                                                           )
@@ -203,11 +191,6 @@ class _NotesPageState extends State<NotesPage> {
                                                       );
                                                     });
                                               },
-                                              child: Text(
-                                                "Delete",
-                                                style: TextStyle(
-                                                    color: Color(0xFFA30003)),
-                                              ),
                                             ),
                                           ],
                                         ),
@@ -230,25 +213,14 @@ class _NotesPageState extends State<NotesPage> {
                         children: <Widget>[
                           SizedBox(height: 10),
                           AppFAB(
-                            toolTip: "Add Category",
-                            heroTag: "Category",
-                            fabIcon: Icons.add_circle_outline_sharp,
-
-                            iconColor: Color(0xFFA30003),
-                            mini: true,
-
-
-                            onPressed: () {
-
-                              addCategoryDialog(context);
-                            }
-
-
-
-                          ),
-
-
-
+                              toolTip: "Add Category",
+                              heroTag: "Category",
+                              fabIcon: Icons.add_circle_outline_sharp,
+                              iconColor: Color(0xFFA30003),
+                              mini: true,
+                              onPressed: () {
+                                addCategoryDialog(context);
+                              }),
                           SizedBox(height: 10),
                           Text(
                             "Add Category",
@@ -261,21 +233,16 @@ class _NotesPageState extends State<NotesPage> {
                         children: <Widget>[
                           AppFAB(
                             toolTip: "Add Note",
-                              heroTag: "Note",
-                              fabIcon: Icons.add_circle_outlined,
-                              borderColor: Colors.black54,
-
-                              onPressed: () async {
-                                var result = await _goAddNoteScreen(context);
-                                if (result != null) {
-                                  setState(() {});
-                                }
-                              },
-
-
-
+                            heroTag: "Note",
+                            fabIcon: Icons.add_circle_outlined,
+                            borderColor: Colors.black54,
+                            onPressed: () async {
+                              var result = await _goAddNoteScreen(context);
+                              if (result != null) {
+                                setState(() {});
+                              }
+                            },
                           ),
-
 
                           /*FloatingActionButton(
                             onPressed: () async {
@@ -308,9 +275,8 @@ class _NotesPageState extends State<NotesPage> {
           ),
           Positioned(
               width: MediaQuery.of(context).size.width,
-              top:10,
+              top: 10,
               child: PageAvatar(
-
                 avatarIcon: Icons.note_add,
               )),
         ],
@@ -396,9 +362,10 @@ class _NotesPageState extends State<NotesPage> {
   }
 
   _goAddNoteScreen(BuildContext context) async {
-
     final result = await Navigator.of(context, rootNavigator: true).push(
-         MaterialPageRoute(fullscreenDialog: true, builder: (context) => AddNotePage(title: "New Note")));
+        MaterialPageRoute(
+            fullscreenDialog: true,
+            builder: (context) => AddNotePage(title: "New Note")));
 
     return result;
   }
@@ -441,10 +408,12 @@ class _NotesPageState extends State<NotesPage> {
   }
 
   _goAddNoteScreenForUpdate(BuildContext context, Notes note) {
-
-    Navigator.of(context, rootNavigator: true).push(
-        MaterialPageRoute(fullscreenDialog: true, builder: (context) => AddNotePage(title: "Update Note", editNote: note,)));
-
+    Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (context) => AddNotePage(
+              title: "Update Note",
+              editNote: note,
+            )));
   }
 
   _deleteNote(int noteID) {

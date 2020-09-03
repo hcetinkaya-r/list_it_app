@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:list_it_app/app/sqflite_database/moor_database/moor_database.dart';
+import 'package:list_it_app/app/sqflite_database/moor_database.dart';
 import 'package:list_it_app/locator.dart';
 import 'package:list_it_app/services/budget/budget_base_model.dart';
 import 'package:list_it_app/services/budget/moor_database_service.dart';
@@ -31,7 +31,7 @@ class InsertTransactionModel extends BudgetBaseModel {
   String selectedMonth;
   DateTime selectedDate = new DateTime.now();
   String type;
-  int cateogryIndex;
+  int categoryIndex;
 
   Future selectDate(context) async {
     unFocusFromTheTextField(context);
@@ -55,7 +55,7 @@ class InsertTransactionModel extends BudgetBaseModel {
     selectedMonth = months[DateTime.now().month - 1];
     selectedDay = DateTime.now().day.toString();
     type = (selectedCategory == 1) ? 'income' : 'expense';
-    cateogryIndex = index;
+    categoryIndex = index;
   }
 
   void unFocusFromTheTextField(context) {
@@ -87,7 +87,7 @@ class InsertTransactionModel extends BudgetBaseModel {
         month: selectedMonth,
         memo: memoController.text,
         amount: int.parse(amount),
-        categoryindex: cateogryIndex);
+        categoryindex: categoryIndex);
 
     await _moorDatabaseService.insertTransaction(newTransaction);
 
