@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:list_it_app/app/app_page/passwords_pages/passwords_home_page.dart';
+import 'package:list_it_app/app/app_pages/passwords_pages/passwords_home_page.dart';
 import 'package:list_it_app/app/sqflite_database/database_helper.dart';
 import 'package:list_it_app/common_widget/app_button.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';

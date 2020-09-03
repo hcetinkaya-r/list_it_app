@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "506216780512",
+    "firebase_url": "https://listit-app-8cdcb.firebaseio.com",
+    "project_id": "listit-app-8cdcb",
+    "storage_bucket": "listit-app-8cdcb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506216780512:android:57bc32dd010aef957a7685",
+        "android_client_info": {
+          "package_name": "com.hcetinkaya.list_it_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506216780512-hqv7j952e75vu3fghbep5sl6l25jbp0r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hcetinkaya.list_it_app",
+            "certificate_hash": "12e9e4d70ec95d9df0d7ea61148be3aff3f947c7"
+          }
+        },
+        {
+          "client_id": "506216780512-8mdflg1kgcuqsekpm45f1cger1tg3vql.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAh57bqa6vds3hRf95QhjqZqDbZhS50Pco"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506216780512-8mdflg1kgcuqsekpm45f1cger1tg3vql.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "506216780512-kv8sujvjn8mejr63hb854m2ha4dceea1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hcetinkaya.listItApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

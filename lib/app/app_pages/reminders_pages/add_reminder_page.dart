@@ -1,7 +1,7 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:list_it_app/app/app_page/reminders_pages/reminders_home_page.dart';
+import 'package:list_it_app/app/app_pages/reminders_pages/reminders_home_page.dart';
 import 'package:list_it_app/app/sqflite_database/database_helper.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
 import 'package:list_it_app/common_widget/page_title.dart';

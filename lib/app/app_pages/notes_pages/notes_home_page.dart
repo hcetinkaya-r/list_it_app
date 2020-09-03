@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:list_it_app/app/app_page/notes/category_list_dialog.dart';
+import 'package:list_it_app/app/app_pages/notes_pages/category_list_dialog.dart';
 import 'package:list_it_app/app/sqflite_database/database_helper.dart';
 import 'package:list_it_app/common_widget/app_FAB.dart';
 import 'package:list_it_app/common_widget/flat_button.dart';

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:list_it_app/app/app_page/assistant_page.dart';
-import 'package:list_it_app/app/app_page/budget_pages/budget_home_page.dart';
-import 'package:list_it_app/app/app_page/budget_pages/details_view.dart';
-import 'package:list_it_app/app/app_page/budget_pages/edit_view.dart';
-import 'package:list_it_app/app/app_page/budget_pages/insert_transaction_view.dart';
-import 'package:list_it_app/app/app_page/budget_pages/new_transaction_view.dart';
-import 'package:list_it_app/app/app_page/budget_pages/piechart_view.dart';
+import 'package:list_it_app/app/app_pages/assistant_page.dart';
+import 'package:list_it_app/app/app_pages/budget_pages/budget_home_page.dart';
+import 'package:list_it_app/app/app_pages/budget_pages/details_view.dart';
+import 'package:list_it_app/app/app_pages/budget_pages/edit_view.dart';
+import 'package:list_it_app/app/app_pages/budget_pages/insert_transaction_view.dart';
+import 'package:list_it_app/app/app_pages/budget_pages/new_transaction_view.dart';
+import 'package:list_it_app/app/app_pages/budget_pages/piechart_view.dart';
 import 'package:list_it_app/app/sqflite_database/moor_database.dart';
 
 class BudgetRouters {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:list_it_app/app/app_page/reminders_pages/add_reminder_page.dart';
+import 'package:list_it_app/app/app_pages/reminders_pages/add_reminder_page.dart';
 import 'package:list_it_app/app/sqflite_database/database_helper.dart';
 import 'package:list_it_app/common_widget/app_FAB.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
