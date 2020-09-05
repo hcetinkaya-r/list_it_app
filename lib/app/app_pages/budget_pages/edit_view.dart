@@ -27,7 +27,7 @@ class EditView extends StatelessWidget {
         body: Stack(
           children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.height/1.6,
+              height: MediaQuery.of(context).size.height/1.4,
               margin: EdgeInsets.fromLTRB(30, 40, 30, 30),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),

@@ -45,7 +45,7 @@ class InsertTransactionView extends StatelessWidget {
                 ),
               ),
               width: double.infinity,
-              height: MediaQuery.of(context).size.height/1.6,
+              height: MediaQuery.of(context).size.height/1.4,
               child: ListView(
                 children: <Widget>[
                   SizedBox(height: 30),

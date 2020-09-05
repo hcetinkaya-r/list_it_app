@@ -22,7 +22,7 @@ class BudgetFAB extends StatelessWidget {
       child: Icon(
         Icons.add_circle_outline,
         color: Color(0xFFA30003),
-        size: 40,
+        size: 35,
       ),
     );
 

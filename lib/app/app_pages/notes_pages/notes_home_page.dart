@@ -347,9 +347,9 @@ class _NotesHomePageState extends State<NotesHomePage> {
   }
 
   _goAddNoteScreen(BuildContext context) async {
-    final result = await Navigator.of(context, rootNavigator: true).push(
+    final result = await Navigator.of(context).push(
         MaterialPageRoute(
-            fullscreenDialog: true,
+
             builder: (context) => AddNotePage(title: "New Note")));
 
     return result;
@@ -393,8 +393,7 @@ class _NotesHomePageState extends State<NotesHomePage> {
   }
 
   _goAddNoteScreenForUpdate(BuildContext context, Notes note) {
-    Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-        fullscreenDialog: true,
+    Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => AddNotePage(
               title: "Update Note",
               editNote: note,

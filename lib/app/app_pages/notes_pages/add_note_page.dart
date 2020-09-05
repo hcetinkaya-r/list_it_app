@@ -10,7 +10,6 @@ import 'package:list_it_app/common_widget/page_avatar.dart';
 import 'package:list_it_app/common_widget/page_title.dart';
 import 'package:list_it_app/models/notes/notes.dart';
 import 'package:list_it_app/models/notes/notes_category.dart';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
@@ -50,7 +49,7 @@ class _AddNotePageState extends State<AddNotePage> {
     super.initState();
     allCategories = List<NotesCategory>();
     allNotes = List<Notes>();
-    myFocusNode = FocusNode();
+    //myFocusNode = FocusNode();
 
     databaseHelper = DatabaseHelper();
     databaseHelper.getCategories().then((mapListContainingCategories) {
@@ -68,12 +67,12 @@ class _AddNotePageState extends State<AddNotePage> {
     });
   }
 
-  @override
+ /* @override
   void dispose() {
     // TODO: implement dispose
     myFocusNode.dispose();
     super.dispose();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -303,7 +302,7 @@ class _AddNotePageState extends State<AddNotePage> {
           ),
         ),
       ]),
-      bottomNavigationBar: BottomNavigationBar(
+      /*bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.edit, size: 30),
@@ -371,7 +370,7 @@ class _AddNotePageState extends State<AddNotePage> {
             }
           });
         },
-      ),
+      ),*/
     );
   }
 
@@ -442,7 +441,7 @@ class _AddNotePageState extends State<AddNotePage> {
         });
   }
 
-  addPhoto(BuildContext context) {
+ /* addPhoto(BuildContext context) {
     showDialog(
         context: context,
         builder: (context) => new CupertinoAlertDialog(
@@ -492,5 +491,5 @@ class _AddNotePageState extends State<AddNotePage> {
             ));
   }
 
-  addVoiceRecord() {}
+  addVoiceRecord() {}*/
 }

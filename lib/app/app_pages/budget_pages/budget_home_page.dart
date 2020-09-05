@@ -29,7 +29,7 @@ class BudgetHomePage extends StatelessWidget {
           floatingActionButton: Visibility(
             visible: model.show,
             child: Padding(
-              padding: const EdgeInsets.only(right: 160, bottom: 30),
+              padding: const EdgeInsets.only(right: 160, bottom: 20),
               child: BudgetFAB(model.closeMonthPicker),
             ),
           ),
@@ -44,7 +44,7 @@ class BudgetHomePage extends StatelessWidget {
                   ),
                 ),
                 width: double.infinity,
-                height: double.infinity,
+                height: MediaQuery.of(context).size.height,
                 child: model.state == BudgetPageState.Busy
                     ? Center(child: CircularProgressIndicator())
                     : Stack(

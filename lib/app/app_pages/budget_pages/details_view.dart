@@ -96,11 +96,12 @@ class DetailsView extends StatelessWidget {
                 ),
                 onPressed: () async {
                   await model.deleteTransaction(transaction);
+                  Navigator.pop(context);
 
-                  Navigator.push(
+                 /* Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => BudgetHomePage()));
+                          builder: (context) => BudgetHomePage()));*/
                 },
               ),
               FlatButton(

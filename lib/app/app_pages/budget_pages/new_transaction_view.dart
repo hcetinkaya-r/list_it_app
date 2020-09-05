@@ -31,7 +31,7 @@ class NewTransactionView extends StatelessWidget {
                 ),
               ),
               width: double.infinity,
-              height: double.infinity,
+              height: MediaQuery.of(context).size.height/1.3,
               child: ListView(
                 padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
                 children: model

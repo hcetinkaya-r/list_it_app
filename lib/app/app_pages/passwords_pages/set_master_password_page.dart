@@ -22,14 +22,14 @@ class _SetMasterPasswordPageState extends State<SetMasterPasswordPage> {
 
   Future<Null> getMasterPass() async {
     final storage = new FlutterSecureStorage();
-    String masterPass = await storage.read(key: 'masterPass') ?? '';
+    String masterPass = await storage.read(key: 'master') ?? '';
     masterPassController.text = masterPass;
   }
 
   saveMasterPass(String masterPass) async {
     final storage = new FlutterSecureStorage();
 
-    await storage.write(key: 'masterPass', value: masterPass);
+    await storage.write(key: 'master', value: masterPass);
   }
 
   authenticate() async {

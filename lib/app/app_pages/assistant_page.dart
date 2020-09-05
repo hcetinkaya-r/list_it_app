@@ -6,7 +6,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:list_it_app/app/app_pages/budget_pages/budget_home_page.dart';
 import 'package:list_it_app/app/app_pages/notes_pages/notes_home_page.dart';
 import 'package:list_it_app/app/app_pages/passwords_pages/passwords_home_page.dart';
-import 'package:list_it_app/app/app_pages/passwords_pages/set_master_password_page.dart';
 import 'package:list_it_app/app/app_pages/reminders_pages/reminders_home_page.dart';
 import 'package:list_it_app/common_widget/app_FAB.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
@@ -24,7 +23,7 @@ class _AssistantPageState extends State<AssistantPage> {
 
   Future checkPasswordsFirstPage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var launch = prefs.getInt("masterPass") ?? 0;
+    var launch = prefs.getInt("master") ?? 0;
 
     final storage = new FlutterSecureStorage();
     String masterPass = await storage.read(key: 'master') ?? '';
@@ -135,21 +134,12 @@ class _AssistantPageState extends State<AssistantPage> {
                           children: [
                             AppFAB(
                               onPressed: () {
-                                if (launch == 0) {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              SetMasterPasswordPage(
-                                                  title:
-                                                      "Set Master Password")));
-                                } else {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              PasswordsHomePage()));
-                                }
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+
+                                        builder: (BuildContext context) =>
+                                            PasswordsHomePage()));
                               },
                               toolTip: "Password",
                               heroTag: "Password",
