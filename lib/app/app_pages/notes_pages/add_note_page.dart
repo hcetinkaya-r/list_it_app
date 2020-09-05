@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:list_it_app/app/app_pages/assistant_page.dart';
 import 'package:list_it_app/app/app_pages/notes_pages/notes_home_page.dart';
 import 'package:list_it_app/app/sqflite_database/database_helper.dart';
 import 'package:list_it_app/common_widget/page_avatar.dart';
@@ -11,7 +10,6 @@ import 'package:list_it_app/common_widget/page_title.dart';
 import 'package:list_it_app/models/notes/notes.dart';
 import 'package:list_it_app/models/notes/notes_category.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 
 // ignore: must_be_immutable
