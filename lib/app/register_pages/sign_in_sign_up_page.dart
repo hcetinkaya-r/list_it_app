@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:list_it_app/models/hata_exception.dart';
 import 'package:list_it_app/app/register_pages/forgot_passoword_page.dart';
@@ -12,6 +13,10 @@ import 'package:list_it_app/common_widget/sensitive_platform_alert_dialog.dart';
 import 'package:list_it_app/models/app_user.dart';
 import 'package:list_it_app/view_models/user_model.dart';
 import 'package:provider/provider.dart';
+
+FirebaseException myError;
+
+
 
 class SignInSignUpPage extends StatefulWidget {
   @override
@@ -41,11 +46,7 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
           print("Oturum açan user id: " + _loggedInAppUser.userID.toString());
       } on FirebaseAuthException catch (e) {
         print("OTURUM AÇMA HATA: " + Errors.showError(e.code));
-        SensitivePlatformAlertDialog(
-                title: "SİGN IN ERROR",
-                content: Errors.showError(e.code),
-                rightButtonText: "OK")
-            .show(context);
+        myError = e;
       }
     } else {
       try {
@@ -55,11 +56,7 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
           print("Olusturulan user id: " + _createdAppUser.userID.toString());
       } on FirebaseAuthException catch (e) {
         print("KULLANICI OLUŞTURMA HATA: " + Errors.showError(e.code));
-        SensitivePlatformAlertDialog(
-                title: "Create user error",
-                content: Errors.showError(e.code),
-                rightButtonText: "OK")
-            .show(context);
+        myError = e;
       }
     }
   }
@@ -90,6 +87,42 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+
+
+
+        if (myError != null &&
+            myError.code == 'user-not-found') {
+          SensitivePlatformAlertDialog(
+              title: "SIGN IN ERROR",
+              content: Errors.showError(myError.code),
+              rightButtonText: "OK")
+              .show(context);
+        } else if (myError != null && myError.code == 'email-already-in-use') {
+          SensitivePlatformAlertDialog(
+              title: "SIGN UP ERROR",
+              content: Errors.showError(myError.code),
+              rightButtonText: "OK")
+              .show(context);
+        }else if(myError != null && myError.code != null){
+          SensitivePlatformAlertDialog(
+              title: "SOMETHING WENT WRONG",
+              content: Errors.showError(myError.code),
+              rightButtonText: "OK")
+              .show(context);
+
+
+        }else
+          return null;
+
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     _buttonText = _formType == FormType.Login ? "Log in" : "Sign up";
     _linkText = _formType == FormType.Login ? "Sign up" : "Log in";
@@ -105,7 +138,6 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
         child: Column(
           children: [
             Container(
-
               child: Image.asset(
                 ("images/loginLogo.png"),
                 width: 125,
@@ -131,8 +163,7 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
                         child: Column(
                           children: <Widget>[
                             Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(20, 50, 20, 0),
+                              padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
                               child: TextFormField(
                                   initialValue: "hakan@hakan.com",
                                   keyboardType: TextInputType.emailAddress,
@@ -154,8 +185,7 @@ class _SignInSignUpPageState extends State<SignInSignUpPage> {
                                   }),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                              padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                               child: TextFormField(
                                 initialValue: "123456",
                                 obscureText: true,

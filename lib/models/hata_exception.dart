@@ -1,5 +1,7 @@
 
 class Errors {
+  String errorCode;
+
   static String showError(String errorCode) {
 
     switch (errorCode) {

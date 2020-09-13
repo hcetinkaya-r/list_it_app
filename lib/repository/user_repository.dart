@@ -11,9 +11,11 @@ enum AppMode { DEBUG, RELEASE }
 
 class UserRepository implements AuthBase {
   FirebaseAuthService _firebaseAuthService = locator<FirebaseAuthService>();
-  FakeAuthenticationService _fakeAuthenticationService = locator<FakeAuthenticationService>();
+  FakeAuthenticationService _fakeAuthenticationService =
+      locator<FakeAuthenticationService>();
   FireStoreDBService _fireStoreDBService = locator<FireStoreDBService>();
-  FirebaseStorageService _firebaseStorageService = locator<FirebaseStorageService>();
+  FirebaseStorageService _firebaseStorageService =
+      locator<FirebaseStorageService>();
 
   AppMode appMode = AppMode.RELEASE;
 
@@ -23,9 +25,11 @@ class UserRepository implements AuthBase {
       return await _fakeAuthenticationService.currentUser();
     } else {
       AppUser _appUser = await _firebaseAuthService.currentUser();
-      return await _fireStoreDBService.readUser(_appUser.userID);
 
-
+      if (_appUser != null)
+        return await _fireStoreDBService.readUser(_appUser.userID);
+      else
+        return null;
     }
   }
 
@@ -53,10 +57,15 @@ class UserRepository implements AuthBase {
       return await _fakeAuthenticationService.signInWithGoogle();
     } else {
       AppUser _appUser = await _firebaseAuthService.signInWithGoogle();
-      bool _result = await _fireStoreDBService.saveUser(_appUser);
 
-      if (_result) {
-        return await _fireStoreDBService.readUser(_appUser.userID);
+      if (_appUser != null) {
+        bool _result = await _fireStoreDBService.saveUser(_appUser);
+        if (_result) {
+          return await _fireStoreDBService.readUser(_appUser.userID);
+        } else {
+          await _firebaseAuthService.signOut();
+          return null;
+        }
       } else
         return null;
     }
@@ -103,28 +112,22 @@ class UserRepository implements AuthBase {
   }
 
   Future<bool> updateUserName(String userID, String newUserName) async {
-    if(appMode == AppMode.DEBUG){
+    if (appMode == AppMode.DEBUG) {
       return false;
-    }else{
+    } else {
       return await _fireStoreDBService.updateUserName(userID, newUserName);
     }
-
   }
 
-  Future<String> uploadFile(String userID, String fileType, File profilePhoto) async {
-    if(appMode == AppMode.DEBUG) {
+  Future<String> uploadFile(
+      String userID, String fileType, File profilePhoto) async {
+    if (appMode == AppMode.DEBUG) {
       return "Dosya indirme linki";
-    }else{
-
-      var profilePhotoURL = await _firebaseStorageService.uploadFile(userID, fileType, profilePhoto);
+    } else {
+      var profilePhotoURL = await _firebaseStorageService.uploadFile(
+          userID, fileType, profilePhoto);
       await _fireStoreDBService.updateProfilePhoto(userID, profilePhotoURL);
       return profilePhotoURL;
-
-
-
-
     }
-
-
   }
 }

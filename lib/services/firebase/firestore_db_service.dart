@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:list_it_app/models/app_user.dart';
 
-
-
 import 'package:list_it_app/services/firebase/database_base.dart';
 
 class FireStoreDBService implements DBBase {
@@ -10,28 +8,34 @@ class FireStoreDBService implements DBBase {
 
   @override
   Future<bool> saveUser(AppUser appUser) async {
-    //Map _userToAddMap = appUser.toMap();
+    DocumentSnapshot _appUserRead =
+        await FirebaseFirestore.instance.doc("users/${appUser.userID}").get();
 
-    /*_userToAddMap['createdAt'] = FieldValue.serverTimestamp();
+    if (_appUserRead.data() == null) {
+      await _firestoreDB
+          .collection('users')
+          .doc(appUser.userID)
+          .set(appUser.toMap());
+
+      return true;
+    } else
+      //Map _userToAddMap = appUser.toMap();
+
+      /*_userToAddMap['createdAt'] = FieldValue.serverTimestamp();
     _userToAddMap['updatedAt'] = FieldValue.serverTimestamp();
 
     _userToAddMap.addAll((<String, dynamic>{
       'yeniAlan' : "yeniAlan",
     }));*/
 
-    await _firestoreDB
-        .collection('users')
-        .doc(appUser.userID)
-        .set(appUser.toMap());
-
-    /*.set(_userToAddMap);*/
-    /* DocumentSnapshot _appUserRead =
+      /*.set(_userToAddMap);*/
+      /* DocumentSnapshot _appUserRead =
         await FirebaseFirestore.instance.doc("users/${appUser.userID}").get();
     Map _appUserInfRead = _appUserRead.data();
     AppUser _appUserInfReadObj = AppUser.fromMap(_appUserInfRead);
     print("Okunan AppUser nesnesi: " + _appUserInfReadObj.toString());*/
 
-    return true;
+      return true;
   }
 
   @override
@@ -70,18 +74,4 @@ class FireStoreDBService implements DBBase {
         .update({'profilePhotoURL': profilePhotoURL});
     return true;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

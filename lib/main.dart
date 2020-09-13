@@ -5,7 +5,6 @@ import 'package:list_it_app/locator.dart';
 import 'package:list_it_app/view_models/user_model.dart';
 import 'package:provider/provider.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -14,7 +13,6 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

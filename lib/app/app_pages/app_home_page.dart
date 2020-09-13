@@ -29,11 +29,16 @@ class _AppHomePageState extends State<AppHomePage> {
 
   Map<TabItem, Widget> allPages() {
     return {
-      TabItem.Assistant : AssistantPage(),
+      TabItem.Assistant: AssistantPage(),
       TabItem.ListIt: ListItPage(),
       TabItem.Profile: ProfilePage(),
-
     };
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -42,7 +47,6 @@ class _AppHomePageState extends State<AppHomePage> {
       onWillPop: () async =>
           !await navigatorKeys[_currentTab].currentState.maybePop(),
       child: CustomBottomNavBar(
-
         pageBuilder: allPages(),
         navigatorKeys: navigatorKeys,
         currentTab: _currentTab,

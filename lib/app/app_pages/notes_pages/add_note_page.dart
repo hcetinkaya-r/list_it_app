@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -10,7 +9,6 @@ import 'package:list_it_app/common_widget/page_title.dart';
 import 'package:list_it_app/models/notes/notes.dart';
 import 'package:list_it_app/models/notes/notes_category.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 
 // ignore: must_be_immutable
 class AddNotePage extends StatefulWidget {
@@ -37,7 +35,7 @@ class _AddNotePageState extends State<AddNotePage> {
   static var _priority = ["low", "medium", "high"];
 
   //final Firestore _firestore = Firestore.instance;
-  File _secilenResim;
+  //File _secilenResim;
   final picker = ImagePicker();
   FocusNode myFocusNode;
 
@@ -59,13 +57,11 @@ class _AddNotePageState extends State<AddNotePage> {
         selectedPriority = widget.editNote.notePriority;
       }
 
-      setState(() {
-
-      });
+      setState(() {});
     });
   }
 
- /* @override
+  /* @override
   void dispose() {
     // TODO: implement dispose
     myFocusNode.dispose();
@@ -293,9 +289,8 @@ class _AddNotePageState extends State<AddNotePage> {
         ),
         Positioned(
           width: MediaQuery.of(context).size.width,
-          top:10,
+          top: 10,
           child: PageAvatar(
-
             avatarIcon: Icons.note_add,
           ),
         ),
@@ -439,7 +434,7 @@ class _AddNotePageState extends State<AddNotePage> {
         });
   }
 
- /* addPhoto(BuildContext context) {
+/* addPhoto(BuildContext context) {
     showDialog(
         context: context,
         builder: (context) => new CupertinoAlertDialog(

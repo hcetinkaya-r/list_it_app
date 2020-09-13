@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,6 +10,9 @@ import 'package:list_it_app/common_widget/sensitive_platform_alert_dialog.dart';
 import 'package:list_it_app/view_models/user_model.dart';
 import 'package:provider/provider.dart';
 
+
+
+
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -18,19 +22,6 @@ class _ProfilePageState extends State<ProfilePage> {
   TextEditingController _controllerUserName;
   File _profilePhoto;
   final picker = ImagePicker();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _controllerUserName = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _controllerUserName.dispose();
-    super.dispose();
-  }
 
   void _takePhoto() async {
     var newPhoto = await picker.getImage(source: ImageSource.camera);
@@ -48,6 +39,19 @@ class _ProfilePageState extends State<ProfilePage> {
       _profilePhoto = File(newPhoto.path);
       Navigator.of(context).pop();
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controllerUserName = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controllerUserName.dispose();
+    super.dispose();
   }
 
   void _updateProfilePhoto(BuildContext context) async {
@@ -82,10 +86,11 @@ class _ProfilePageState extends State<ProfilePage> {
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.only(right: 15),
-            child: IconButton(icon: Icon(Icons.exit_to_app), onPressed: () => _askForConfirmSignOut(context),),
+            child: IconButton(
+              icon: Icon(Icons.exit_to_app),
+              onPressed: () => _askForConfirmSignOut(context),
+            ),
           ),
-
-
         ],
       ),
       body: Column(
@@ -110,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         PageTitle(
                           title: "Profile",
                         ),
-                        SizedBox(height:20),
+                        SizedBox(height: 20),
                         GestureDetector(
                           onTap: () {
                             showModalBottomSheet(
@@ -148,7 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 : FileImage(_profilePhoto),
                           ),
                         ),
-                        SizedBox(height:20),
+                        SizedBox(height: 20),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
@@ -158,7 +163,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               labelText: "Your E-Mail",
                               prefixIcon: Icon(Icons.email),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
                               ),
                             ),
                           ),
@@ -171,16 +177,18 @@ class _ProfilePageState extends State<ProfilePage> {
                               labelText: "Your User Name",
                               prefixIcon: Icon(Icons.drive_file_rename_outline),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
                               ),
                             ),
                           ),
                         ),
-                        Text("You can change your user name", style: TextStyle(color: Colors.black54),),
+                        Text(
+                          "You can change your user name",
+                          style: TextStyle(color: Colors.black54),
+                        ),
                       ],
                     ),
-
-
                     AppButton(
                         buttonText: "Save",
                         textColor: Colors.white,
